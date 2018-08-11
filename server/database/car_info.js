@@ -1,47 +1,45 @@
-const Drivpass = require("../models/drivpass");
+const CarInfo = require("../models").car_info;
 
-module.exports = {
-  selectByEmail(email) {
-    Drivpass.findOne({ where: { email: email } }).then(
-      query => {
-        return query;
-      },
-      err => {}
-    );
+async function selectCar(id_user) {
+  try {
+    const query = await CarInfo.find({ where: { id_user: id_user } });
+    return query.dataValues;
+  } catch (e) {
+    console.log(e);
   }
-};
+}
 
-const squel = require("squel");
-
-function selectByEmail(email) {}
-
-module.exports = {
-  selectByEmail: email => {
-    const query = `SELECT * FROM drivpass WHERE  email = ('${email}')`;
-    return query;
-  },
-  selectCar: id_user => {
-    const query = `SELECT * FROM car_info WHERE  id_user = ('${id_user}')`;
-    return query;
-  },
-  insert: (table, data) => {
-    const squelPostgres = squel.useFlavour("postgres");
-    return squelPostgres
-      .insert()
-      .into(table)
-      .setFields(data)
-      .returning("id")
-      .toString();
-  },
-  update: (table, data, id_platecar) => {
-    return squel
-      .update()
-      .table(table)
-      .setFields(data)
-      .where("id =" + id_platecar)
-      .toString();
-  },
-  selectPlate: plate => {
-    return `SELECT * FROM car_info WHERE number = ('${plate}')`;
+async function insert(data) {
+  try {
+    const query = await CarInfo.create(data);
+    return query.dataValues;
+  } catch (e) {
+    console.log(e);
   }
-};
+}
+
+async function selectPlate(plate) {
+  try {
+    const query = await CarInfo.find({ where: { number: plate } });
+    return query.dataValues;
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+async function update(data, id_platecar) {
+  try {
+    const query = await CarInfo.update(data, {
+      returning: true,
+      where: { id: id_platecar }
+    });
+    return query.dataValues;
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+exports.selectCar = selectCar;
+exports.insert = insert;
+exports.selectPlate = selectPlate;
+exports.update = update;

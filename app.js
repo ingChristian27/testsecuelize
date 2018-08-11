@@ -1,26 +1,11 @@
-const Sequelize = require("sequelize");
+var express = require("express");
+var app = express();
 
-const connection = new Sequelize("postgres", "postgres", "root", {
-  dialect: "postgres"
+const port = parseInt(process.env.PORT, 10) || 8000;
+const carRouter = require("./server/router/car");
+
+app.use("/car", carRouter);
+
+app.listen(port, function() {
+  console.log("Server Express Ready!");
 });
-
-const Article = connection.define("article", {
-  title: { type: Sequelize.STRING },
-  body: { type: Sequelize.TEXT }
-});
-
-const person = connection.define("person", {
-  title: { type: Sequelize.STRING },
-  body: { type: Sequelize.TEXT }
-});
-
-connection
-  .sync()
-  .then(res => {
-    Article.findAll(respuesta => {
-      console.log(respuesta);
-    });
-  })
-  .catch(err => {
-    console.log(err);
-  });

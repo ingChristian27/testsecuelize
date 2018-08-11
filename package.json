@@ -4,17 +4,48 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node .app.js",
+    "dev": "nodemon app.js",
     "migrate": "./node_modules/.bin/sequelize db:migrate"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.17.2",
+    "braintree": "^2.5.0",
+    "chai": "^4.1.1",
+    "chai-http": "^3.0.0",
+    "cloudinary": "^1.9.1",
+    "co": "^4.6.0",
+    "connect-multiparty": "^2.1.0",
+    "cors": "^2.8.4",
+    "dotenv": "^4.0.0",
+    "express": "^4.16.3",
+    "express-fileupload": "^0.3.0",
+    "express-namespace-routes": "0.0.3",
+    "express-validation": "^1.0.2",
+    "fcm-node": "^1.2.1",
+    "firebase": "^4.6.2",
+    "firebase-admin": "^5.5.0",
+    "google-distance": "^1.0.1",
+    "joi": "^10.6.0",
+    "jsonwebtoken": "^8.1.0",
+    "mocha": "^3.5.0",
+    "moment": "^2.22.2",
+    "mysql": "^2.14.1",
+    "node-persist": "^2.1.0",
+    "paypal-rest-sdk": "^1.8.1",
     "pg": "^7.4.3",
     "pg-hstore": "^2.3.2",
     "sequelize": "^4.38.0",
     "sequelize-auto-migrations": "^1.0.2",
-    "sequelize-cli": "^4.0.0"
+    "sequelize-cli": "^4.0.0",
+    "socket.io": "^2.1.0",
+    "squel": "^5.11.1",
+    "uuid": "^3.2.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.3"
   }
 }
