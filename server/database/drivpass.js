@@ -25,7 +25,7 @@ async function selectById(delivery_id) {
   }
 }
 async function insert(table, data) {
-  // # TODO: RETURNA ID
+  // # TODO: DEBE RETORNAR EL ID
   try {
     const query = await Drivpass.create(data);
     return query.dataValues;
@@ -34,48 +34,72 @@ async function insert(table, data) {
   }
 }
 
+async function selectByUser(id_user, user_type) {
+  try {
+    let query;
+    if (user_type == 1) {
+      query = await Drivpass.find({ where: { id_driver: id_user } });
+    } else {
+      query = await Drivpass.find({ where: { id_user: id_user } });
+    }
+    return query;
+  } catch (e) {
+    console.log(e);
+  }
+}
+async function selectByDriver(driver_id) {
+  try {
+    const query = await Drivpass.find({
+      where: { id_driver: driver_id, status: 1 }
+    });
+    return query.dataValues;
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+async function selectByPassenger(user_id) {
+  try {
+    const query = await Drivpass.find({
+      where: { id_user: user_id, status: 1 }
+    });
+    return query.dataValues;
+  } catch (e) {
+    console.log(e);
+  }
+}
+async function update(data, id_delivery) {
+  try {
+    const query = await Drivpass.update(data, {
+      returning: true,
+      where: { id: id_delivery }
+    });
+    return query;
+  } catch {}
+}
+
 exports.selectByEmail = selectByEmail;
 exports.all = all;
 exports.selectById = selectById;
+exports.insert = insert;
+exports.selectByUser = selectByUser;
+exports.selectByPassenger = selectByPassenger;
+exports.update = update;
 
-/**
- * const squel = require("squel");
-
-module.exports = {
- 
-
-  selectByUser: (id_user, user_type) =>{
-    var query;
-    if(user_type == 1){
-       query = `SELECT * FROM delivery WHERE id_driver = ('${id_user}')`;
-    }else{
-       query = `SELECT * FROM delivery WHERE id_user = ('${id_user}')`;
-    }
-    return query;
-  },
-  selectByDriver: (driver_id)=>{
-    const query = `SELECT * FROM delivery WHERE id_driver = ('${driver_id}') AND status = 1`;
-    return query;
-  },
-  selectByPassenger: (user_id) =>{
-    const query = `SELECT * FROM delivery WHERE id_user = ('${user_id}') AND status = 1`;
-    return query;
-  },
-  insert: (table,data)  => {
-    const squelPostgres = squel.useFlavour('postgres');
-    return squelPostgres.insert().into(table).setFields(data).returning('id').toString();
-  },
-  update: (table,data,id_delivery)  => {
-   	return squel.update().table(table).setFields(data).where("id =" + id_delivery).toString();
-  },
-  total_deliveries: ()=>{
+/*
+  async function total_deliveries(){
+      :TODO: Al parecer está función corresponde a otra tabla completamente diferente con el modelo
     const query = `SELECT count(*)  AS deliveries FROM delivery WHERE delivery_status = 0`;
     return query;
-  },
-  lookingForDrivers: () => {
-    return squel.insert().into("delivery_driver").setFieldsRows(data).toString();    
-  },
-  infoDeliveryToDriver: (id_delivery, id_driver)=>{
+  }
+    
+
+  async function lookingForDrivers(){
+      :TODO: Al parecer está función corresponde a otra tabla completamente diferente con el modelo
+    return squel.insert().into("delivery_driver").setFieldsRows(data).toString();
+  }
+
+    infoDeliveryToDriver: (id_delivery, id_driver)=>{
     const query = `SELECT d.*, dd.id as id_delivery_driver, dd.response, dd.counteroffer, dv.id as id_passenger dv.name, dv.email. dv.phone, dv.image, dv.video
                     FROM delivery d
                     JOIN delivery_driver dd ON dd.id_delivery = d.id
@@ -86,6 +110,4 @@ module.exports = {
     return query;
 
   }
-}
-
- */
+*/
