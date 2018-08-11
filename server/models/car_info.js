@@ -20,6 +20,7 @@ module.exports = (sequelize, DataTypes) => {
   );
   car_info.associate = function(models) {
     // associations can be defined here
+    car_info.belongsTo(models.drivpass); // Will add drivpassId to car_info
   };
   return car_info;
 };

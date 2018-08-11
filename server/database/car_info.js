@@ -1,5 +1,13 @@
 const CarInfo = require("../models").car_info;
 
+/*
+selectByEmail : (email) => {
+  const query = `SELECT * FROM drivpass WHERE  email = ('${email}')`;
+  return query;
+},
+*/
+
+
 async function selectCar(id_user) {
   try {
     const query = await CarInfo.find({ where: { id_user: id_user } });
