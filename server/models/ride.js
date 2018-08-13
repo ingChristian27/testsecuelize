@@ -1,7 +1,7 @@
 "use strict";
 module.exports = (sequelize, DataTypes) => {
   var Ride = sequelize.define(
-    "Ride",
+    "ride",
     {
       id_passenger: {
         type: DataTypes.INTEGER,
@@ -75,8 +75,8 @@ module.exports = (sequelize, DataTypes) => {
   );
   Ride.associate = function(models) {
     // associations can be defined here
-    Ride.belongsTo(models.drivpass); // Will add drivpassId to Ride
-    Ride.belongsTo(models.drivpass); // Will add drivpassId to Ride
+    //Ride.belongsTo(models.drivpass); // Will add drivpassId to Ride
+    //Ride.belongsTo(models.drivpass); // Will add drivpassId to Ride
   };
   return Ride;
 };

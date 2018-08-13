@@ -29,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
   );
   message.associate = function(models) {
     // associations can be defined here
-    message.belongsTo(models.drivpass); // Will add drivpassId to message
+    //message.belongsTo(models.drivpass); // Will add drivpassId to message
   };
   return message;
 };

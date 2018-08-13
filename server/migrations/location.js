@@ -39,7 +39,7 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable("locations");
+    //return queryInterface.dropTable("locations");
   }
 };
 

@@ -25,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
   );
   drivpass_user_type.associate = function(models) {
     // associations can be defined here
-    drivpass_user_type.belongsTo(models.drivpass); // Will add drivpassId to drivpass_user_type
+    //drivpass_user_type.belongsTo(models.drivpass); // Will add drivpassId to drivpass_user_type
   };
   return drivpass_user_type;
 };

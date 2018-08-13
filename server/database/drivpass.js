@@ -1,13 +1,36 @@
-const Drivpass = require("../models/drivpass");
+const Drivpass = require("../models").drivpass;
+const DrivpassUserType = require("../models").drivpass_user_type;
 
 async function selectByEmail(email) {
   try {
     const query = await Drivpass.find({ where: { email: email } });
-    return query.dataValues;
+
+    if (query != null && query.dataValues != null) {
+      return query.dataValues;
+    } else {
+      return null;
+    }
+
   } catch (e) {
     console.log(e);
   }
 }
+
+async function selectByEmailAndPassword(email, password) {
+  try {
+    const query = await Drivpass.find({ where: { email: email, password: password } });
+
+    if (query != null && query.dataValues != null) {
+      return query.dataValues;
+    } else {
+      return null;
+    }
+
+  } catch (e) {
+    console.log(e);
+  }
+}
+
 async function all() {
   try {
     const query = await Drivpass.findAll();
@@ -19,12 +42,18 @@ async function all() {
 async function selectById(delivery_id) {
   try {
     const query = await Drivpass.find({ where: { id: delivery_id } });
-    return query.dataValues;
+
+    if (query != null && query.dataValues != null) {
+      return query.dataValues;
+    } else {
+      return null;
+    }
+    
   } catch (e) {
     console.log(e);
   }
 }
-async function insert(table, data) {
+async function insert(data) {
   // # TODO: DEBE RETORNAR EL ID
   try {
     const query = await Drivpass.create(data);
@@ -75,8 +104,33 @@ async function update(data, id_delivery) {
       where: { id: id_delivery }
     });
     return query;
-  } catch {}
+  } catch (e) { }
 }
+
+
+
+async function drivpass_user_type(id_user, id_profile) {
+  try {
+    const query = await DrivpassUserType.find({ where: { id_drivpass: id_user, user_type: id_profile } });
+
+    if (query != null && query.dataValues != null) {
+      return query.dataValues;
+    } else {
+      return null;
+    }
+    return query;
+  } catch (e) { }
+}
+
+async function drivpass_user_type_addProfile(data){
+  try {
+    const query = await DrivpassUserType.create(data);
+    return query.dataValues;
+  } catch (e) {
+    console.log(e);
+  }
+}
+
 
 exports.selectByEmail = selectByEmail;
 exports.all = all;
@@ -85,6 +139,10 @@ exports.insert = insert;
 exports.selectByUser = selectByUser;
 exports.selectByPassenger = selectByPassenger;
 exports.update = update;
+exports.selectByEmailAndPassword = selectByEmailAndPassword;
+exports.drivpass_user_type = drivpass_user_type;
+exports.drivpass_user_type_addProfile = drivpass_user_type_addProfile;
+
 
 /*
   async function total_deliveries(){

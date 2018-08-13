@@ -36,8 +36,8 @@ module.exports = (sequelize, DataTypes) => {
   );
   delivery_driver.associate = function(models) {
     // associations can be defined here
-    delivery_driver.belongsTo(models.delivery); // Will add deliveryId to delivery_driver
-    delivery_driver.belongsTo(models.drivpass); // Will add drivpassId to delivery_driver
+    //delivery_driver.belongsTo(models.delivery); // Will add deliveryId to delivery_driver
+    //delivery_driver.belongsTo(models.drivpass); // Will add drivpassId to delivery_driver
   };
   return delivery_driver;
 };

@@ -39,8 +39,8 @@ module.exports = (sequelize, DataTypes) => {
   );
   valoration.associate = function(models) {
     // associations can be defined here
-    valoration.belongsTo(models.drivpass); // Will add drivpassId to valoration
-    valoration.belongsTo(models.drivpass); // Will add drivpassId to valoration
+    //valoration.belongsTo(models.drivpass); // Will add drivpassId to valoration
+    //valoration.belongsTo(models.drivpass); // Will add drivpassId to valoration
   };
   return valoration;
 };

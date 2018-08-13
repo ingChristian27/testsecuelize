@@ -1,9 +1,15 @@
-const Locations = require("../models").locations;
+const Locations = require("../models").location;
 
 async function selectById(id_user) {
   try {
     const query = await Locations.find({ where: { id_user: id_user } });
-    return query.dataValues;
+    
+    if (query != null && query.dataValues != null) {
+      return query.dataValues;
+    } else {
+      return null;
+    }
+
   } catch (e) {
     console.log(e);
   }
@@ -26,7 +32,7 @@ async function update(data, id_user) {
       where: { id_user: id_user }
     });
     return query;
-  } catch { }
+  } catch (e) { }
 }
 
 async function inhabilitate_driver() {
@@ -37,7 +43,7 @@ async function inhabilitate_driver() {
       where: { id_user: $1 }
     });
     return query;
-  } catch { }
+  } catch (e) { }
 }
 
 async function habilitate_driver() {
@@ -48,7 +54,7 @@ async function habilitate_driver() {
       where: { id_user: $1 }
     });
     return query;
-  } catch { }
+  } catch (e) { }
 }
 
 exports.selectById = selectById;

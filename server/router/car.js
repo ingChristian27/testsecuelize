@@ -16,7 +16,11 @@ router
   .post("/", async (req, res) => {
     try {
       console.log("Nueva consulta....");
-      console.log(req.body);
+      console.log(req.body.id);
+
+      return res.status(200).send("OK");
+
+
       const data = {
         model: "renault",
         id_user: 1,

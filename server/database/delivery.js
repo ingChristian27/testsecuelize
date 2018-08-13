@@ -26,7 +26,13 @@ async function selectByUser(id_user, user_type) {
     } else {
       query = await Delivery.find({ where: { id_user: id_user } });
     }
-    return query.dataValues;
+    
+    if (query != null && query.dataValues != null) {
+      return query.dataValues;
+    } else {
+      return null;
+    }
+    
   } catch (e) {
     console.log(e);
   }
@@ -71,7 +77,7 @@ async function update(data, id_delivery) {
       where: { id: id_delivery }
     });
     return query;
-  } catch {}
+  } catch(e){}
 }
 
 async function total_deliveries() {

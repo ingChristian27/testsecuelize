@@ -35,7 +35,7 @@ module.exports = (sequelize, DataTypes) => {
   );
   ride_driver.associate = function(models) {
     // associations can be defined here
-    ride_driver.belongsTo(models.drivpass);
+    //ride_driver.belongsTo(models.drivpass);
     //ride_driver.belongsTo(models.drivpass); // Will add drivpassId to ride_driver
     //ride_driver.belongsTo(models.ride); // Will add rideId to ride_driver
   };

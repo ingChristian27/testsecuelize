@@ -28,6 +28,7 @@ async function all() {
 }
 
 async function selectByUser(id_user, user_type) {
+  console.log("IN HERE+++++++++++",id_user,user_type)
   try {
     let query;
     if (user_type == 1) {
@@ -35,7 +36,13 @@ async function selectByUser(id_user, user_type) {
     } else {
       query = await Ride.find({ where: { id_passenger: id_user } });
     }
-    return query.dataValues;
+    
+    if (query != null && query.dataValues != null) {
+      return query.dataValues;
+    } else {
+      return null;
+    }
+    
   } catch (e) {
     console.log(e);
   }
@@ -80,7 +87,7 @@ async function update(data,id_ride) {
       where: { id: id_ride }
     });
     return query;
-  } catch { }
+  } catch (e) { }
 }
 
 
