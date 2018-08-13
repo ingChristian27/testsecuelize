@@ -3,7 +3,7 @@ const router = express.Router();
 const Database = require("../database/drivpass");
 const DatabaseRide = require("../database/ride");
 const DatabaseDelivery = require("../database/delivery");
-const DatabaseLocation =  require("../database/locations");
+const DatabaseLocation = require("../database/locations");
 router
 
   .get("/", async (req, res, next) => {
@@ -70,7 +70,7 @@ router
 
   .get("/:id", async (req, res, next) => {
     try {
-      
+
       const user_type = req.params.id; //1 driver, 2 passenger
 
       var acu = 0;
@@ -117,17 +117,17 @@ router
       }
 
       let total_rides = 0;
-      if(rides != null){
+      if (rides != null) {
         total_rides = rides.length;
       }
 
       let total_deliveries = 0;
-      if(deliveries != null){
+      if (deliveries != null) {
         total_deliveries = deliveries.length;
       }
 
       let total_valorations = 0;
-      if(valoration != null){
+      if (valoration != null) {
         total_valorations = valoration.length;
       }
 
@@ -144,8 +144,40 @@ router
         total_valorations: total_valorations
       });
 
-    } catch (e) { 
+    } catch (e) {
       console.log(e)
+    }
+  })
+
+  .post("/edit/:id", async (req, res, next) => {
+    try {
+
+      const id = req.params.id;
+      const params = req.body;
+      const drivpass = await Database.selectById(id);
+      if (drivpass == null) return res.status(200).json({ message: "User doesn´t exist" });
+      const parameters = {
+        name: params.name || drivpass.name,
+        phone: params.phone || drivpass.phone,
+        email: params.email || drivpass.email,
+        city: params.city || drivpass.city,
+        password: params.password || drivpass.password,
+        image: params.image || drivpass.image,
+        video: params.video || drivpass.video,
+        auth_sms: params.auth_sms || drivpass.auth_sms,
+        reg_id: params.reg_id || drivpass.reg_id,
+        status_profile: params.status_profile || drivpass.status_profile,
+        btoken: params.btoken || drivpass.btoken,
+        led_status: params.led_status || drivpass.led_status,
+        status: params.status || drivpass.status
+      };
+      const id_drivpass = drivpass.id;
+
+      const put = await Database.update( parameters, id_drivpass);
+      return res.status(200).json({ success: true });
+
+    } catch (e) {
+      next(e);
     }
   })
 

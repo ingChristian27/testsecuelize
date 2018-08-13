@@ -20,7 +20,7 @@ async function insertBulk(data) {
   // # TODO: DEBE RETORNAR EL ID
   console.log("THIS DTA",data)
   try {
-    const query = await DriverTypeAssign.bulkCreate(data[0]);
+    const query = await DriverTypeAssign.bulkCreate(data);
     
     if (query != null && query.dataValues != null) {
       return query.dataValues;
