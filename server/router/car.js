@@ -13,31 +13,45 @@ router
     }
   })
 
-  .get("/add", async (req, res, next) => {
+  .post("/", async (req, res) => {
     try {
+      console.log("Nueva consulta....");
+      console.log(req.body);
       const data = {
         model: "renault",
         id_user: 1,
         year: "2017",
         make: "something",
-        model: "renault",
         color: "blanco",
         plate: "123abs",
         status: 1
       };
-      const result = await Database.insert(data);
+      data = req.body;
+      result = await Database.insert(data);
       console.log(result);
       res.json(result);
+      res.json({ test: "test" });
     } catch (e) {
-      next(e);
+      return res.status(500).send({
+        message: "No se ha podido agregar el elemento."
+      });
     }
   })
 
-  .get("/ver", function(request, response) {
-    Car.findAll().then(result => {
-      // #TODO: Si no trae datos, trae undefined
-      response.json(result);
-    });
+  .get("/ver", async (req, res) => {
+    try {
+      console.log("entro a ver....");
+      const query = await Database.getAll();
+      console.log("================");
+      console.log(query);
+      res.json(query);
+    } catch (e) {
+      response = { message: "Ha ocurrido un error inesperado", err: e };
+    }
   });
 
 module.exports = router;
+
+/**
+ * car_info
+ */

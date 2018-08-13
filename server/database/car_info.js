@@ -7,7 +7,6 @@ selectByEmail : (email) => {
 },
 */
 
-
 async function selectCar(id_user) {
   try {
     const query = await CarInfo.find({ where: { id_user: id_user } });
@@ -20,6 +19,16 @@ async function selectCar(id_user) {
 async function insert(data) {
   try {
     const query = await CarInfo.create(data);
+    return query.dataValues;
+  } catch (e) {
+    console.log(e);
+  }
+}
+async function getAll() {
+  try {
+    console.log("va a buscar los elementos...");
+    const query = await CarInfo.find();
+    console.log(query);
     return query.dataValues;
   } catch (e) {
     console.log(e);
@@ -51,3 +60,4 @@ exports.selectCar = selectCar;
 exports.insert = insert;
 exports.selectPlate = selectPlate;
 exports.update = update;
+exports.getAll = getAll;

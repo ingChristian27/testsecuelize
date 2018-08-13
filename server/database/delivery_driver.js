@@ -2,7 +2,9 @@ const DeliveryDriver = require("../models").delivery_driver;
 
 async function verify(id_driver) {
   try {
-    const query = await DeliveryDriver.find({ where: { id_driver: id_driver } });
+    const query = await DeliveryDriver.find({
+      where: { id_driver: id_driver }
+    });
     return query.dataValues;
   } catch (e) {
     console.log(e);
@@ -37,7 +39,7 @@ exports.update = update;
   },
   */
 
-  /*
+/*
   selectByUser: (id_user,id_delivery)=> {
     const query =  `SELECT dd.*, d.*, dv.*
                     FROM delivery_driver dd
@@ -53,6 +55,4 @@ exports.update = update;
 
 
 
-
-
-
+*/
