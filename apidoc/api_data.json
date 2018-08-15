@@ -31,6 +31,16 @@
   },
   {
     "type": "get",
+    "url": "/car/info{id}",
+    "title": "Get Car Info",
+    "name": "Get_Car_Info",
+    "group": "Car",
+    "version": "0.0.0",
+    "filename": "server/apidoc.js",
+    "groupTitle": "Car"
+  },
+  {
+    "type": "get",
     "url": "/car_marks",
     "title": "Obtain Car Marks",
     "name": "Obtain_Car_Marks",
@@ -102,6 +112,122 @@
   },
   {
     "type": "post",
+    "url": "/delivery/add",
+    "title": "Add Delivery Passenger",
+    "name": "Add_Delivery_Passenger",
+    "group": "Delivery",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "id_user",
+            "description": "<p>User Id.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "package_details",
+            "description": "<p>Package Details.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "location_start",
+            "description": "<p>Location Start.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "location_end",
+            "description": "<p>Location End.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "latitude_start",
+            "description": "<p>Latitude Start.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "longitude_start",
+            "description": "<p>Longitude Start.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "latitude_end",
+            "description": "<p>Latitude End.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "longitude_end",
+            "description": "<p>Longitude End.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "price",
+            "description": "<p>Price.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "accept_counteroffer",
+            "description": "<p>Accept Counteroffer.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "server/apidoc.js",
+    "groupTitle": "Delivery"
+  },
+  {
+    "type": "post",
+    "url": "/refer_driver",
+    "title": "Add Reder Driver",
+    "name": "Add_Reder_Driver",
+    "group": "Driver",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "id_driver",
+            "description": "<p>Driver Id.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "plate",
+            "description": "<p>Driver Plate.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "server/apidoc.js",
+    "groupTitle": "Driver"
+  },
+  {
+    "type": "post",
     "url": "/types/add/{id}",
     "title": "Save Type Driver",
     "name": "Save_Type_Driver",
@@ -122,6 +248,187 @@
     "version": "0.0.0",
     "filename": "server/apidoc.js",
     "groupTitle": "Driver"
+  },
+  {
+    "type": "post",
+    "url": "/favorite/add",
+    "title": "Add Favorite Driver",
+    "name": "Add_Favorite_Driver",
+    "group": "Favorite",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "id_passenger",
+            "description": "<p>Passenger Id.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "id_driver",
+            "description": "<p>Driver Id.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "server/apidoc.js",
+    "groupTitle": "Favorite"
+  },
+  {
+    "type": "post",
+    "url": "/favorite/add_plate",
+    "title": "Add Favorite Driver Plate",
+    "name": "Add_Favorite_Driver_Plate",
+    "group": "Favorite",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "plate",
+            "description": "<p>Driver Plate.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "id_passenger",
+            "description": "<p>Passenger Id.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "server/apidoc.js",
+    "groupTitle": "Favorite"
+  },
+  {
+    "type": "post",
+    "url": "/favorite/delete",
+    "title": "Delete Favorite Driver",
+    "name": "Delete_Favorite_Driver",
+    "group": "Favorite",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "id_passenger",
+            "description": "<p>Passenger Id.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "id_driver",
+            "description": "<p>Driver Id.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "server/apidoc.js",
+    "groupTitle": "Favorite"
+  },
+  {
+    "type": "post",
+    "url": "/favorite/search",
+    "title": "Search Favorite Driver",
+    "name": "Search_Favorite_Driver",
+    "group": "Favorite",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "id_passenger",
+            "description": "<p>Passenger Id.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "id_driver",
+            "description": "<p>Driver Id.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "server/apidoc.js",
+    "groupTitle": "Favorite"
+  },
+  {
+    "type": "post",
+    "url": "/saved_location",
+    "title": "Add Saved Location",
+    "name": "Add_Saved_Location",
+    "group": "Location",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>Location Name.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "latitud",
+            "description": "<p>Location latitude.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "longitud",
+            "description": "<p>Location Longitud.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "description",
+            "description": "<p>Location Description.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "user_id",
+            "description": "<p>User Id.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "server/apidoc.js",
+    "groupTitle": "Location"
+  },
+  {
+    "type": "get",
+    "url": "/saved_location/{id}",
+    "title": "Get Saved Location",
+    "name": "Get_Saved_Location",
+    "group": "Location",
+    "version": "0.0.0",
+    "filename": "server/apidoc.js",
+    "groupTitle": "Location"
   },
   {
     "type": "post",
@@ -166,6 +473,258 @@
     "version": "0.0.0",
     "filename": "server/apidoc.js",
     "groupTitle": "Location"
+  },
+  {
+    "type": "post",
+    "url": "/add_payment_method",
+    "title": "Add Method Payment",
+    "name": "Add_Method_Payment",
+    "group": "Payment",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "nonceFromClient",
+            "description": "<p>Client.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "customerId",
+            "description": "<p>Customer Id.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "amount",
+            "description": "<p>Amount.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "server/apidoc.js",
+    "groupTitle": "Payment"
+  },
+  {
+    "type": "post",
+    "url": "/delete_payment",
+    "title": "Delete Method Payment",
+    "name": "Delete_Method_Payment",
+    "group": "Payment",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "token",
+            "description": "<p>Token.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "server/apidoc.js",
+    "groupTitle": "Payment"
+  },
+  {
+    "type": "post",
+    "url": "/client",
+    "title": "Get Account Payment",
+    "name": "Get_Account_Payment",
+    "group": "Payment",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "customerId",
+            "description": "<p>Customer Id.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "server/apidoc.js",
+    "groupTitle": "Payment"
+  },
+  {
+    "type": "get",
+    "url": "/history_payment/{id}",
+    "title": "Get History payment",
+    "name": "Get_History_payment",
+    "group": "Payment",
+    "version": "0.0.0",
+    "filename": "server/apidoc.js",
+    "groupTitle": "Payment"
+  },
+  {
+    "type": "get",
+    "url": "/client_token",
+    "title": "Get Token Payment",
+    "name": "Get_Token_Payment",
+    "group": "Payment",
+    "version": "0.0.0",
+    "filename": "server/apidoc.js",
+    "groupTitle": "Payment"
+  },
+  {
+    "type": "get",
+    "url": "/client_token_id/{id}",
+    "title": "Get Token Payment ID",
+    "name": "Get_Token_Payment",
+    "group": "Payment",
+    "version": "0.0.0",
+    "filename": "server/apidoc.js",
+    "groupTitle": "Payment"
+  },
+  {
+    "type": "post",
+    "url": "/user/buytoken",
+    "title": "Save Token Payment",
+    "name": "Save_Token_Payment",
+    "group": "Payment",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "payment_method_id",
+            "description": "<p>Payment Method Id.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "n_tokes",
+            "description": "<p>Token.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "total",
+            "description": "<p>Total.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "user_id",
+            "description": "<p>User Id.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "payment_date",
+            "description": "<p>Payment Date.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "server/apidoc.js",
+    "groupTitle": "Payment"
+  },
+  {
+    "type": "post",
+    "url": "/payments",
+    "title": "Send Method Payment",
+    "name": "Send_Method_Payment",
+    "group": "Payment",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "payment_method_nonce",
+            "description": "<p>Payment Method.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "amount",
+            "description": "<p>Payment amount.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>User name.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "email",
+            "description": "<p>User email.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "phone",
+            "description": "<p>User phone.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "lastname",
+            "description": "<p>User lastname.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "server/apidoc.js",
+    "groupTitle": "Payment"
+  },
+  {
+    "type": "post",
+    "url": "/payments_exist",
+    "title": "Send Payment Exists",
+    "name": "Send_Payment_Exists",
+    "group": "Payment",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "tokenPaymentMethod",
+            "description": "<p>Payment Token.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "amount",
+            "description": "<p>Payment amount</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "server/apidoc.js",
+    "groupTitle": "Payment"
   },
   {
     "type": "post",
@@ -219,6 +778,104 @@
     "version": "0.0.0",
     "filename": "server/apidoc.js",
     "groupTitle": "Profile"
+  },
+  {
+    "type": "get",
+    "url": "/valoration/{id}/type",
+    "title": "Get History Rating User",
+    "name": "Get_History_Rating_User",
+    "group": "Rating",
+    "version": "0.0.0",
+    "filename": "server/apidoc.js",
+    "groupTitle": "Rating"
+  },
+  {
+    "type": "post",
+    "url": "/valoration/add",
+    "title": "Rating user",
+    "name": "Rating_user",
+    "group": "Rating",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "id_user",
+            "description": "<p>User Id.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "id_drivpass",
+            "description": "<p>Passenger Id.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "commentary",
+            "description": "<p>Commentary.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "rating",
+            "description": "<p>Rating.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "type",
+            "description": "<p>Type.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "server/apidoc.js",
+    "groupTitle": "Rating"
+  },
+  {
+    "type": "put",
+    "url": "/ride/counteroffer/{idRide}",
+    "title": "Counter Offer Ride Driver",
+    "name": "Counter_Offer_Ride_Driver",
+    "group": "Ride",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "id_driver",
+            "description": "<p>Driver Id.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "response",
+            "description": "<p>Response Body.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "counteroffer",
+            "description": "<p>Counter offer</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "server/apidoc.js",
+    "groupTitle": "Ride"
   },
   {
     "type": "post",
@@ -295,6 +952,56 @@
         ]
       }
     },
+    "version": "0.0.0",
+    "filename": "server/apidoc.js",
+    "groupTitle": "Ride"
+  },
+  {
+    "type": "put",
+    "url": "/ride/edit/{idRide}",
+    "title": "Edit Ride Driver",
+    "name": "Edit_Ride_Driver",
+    "group": "Ride",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "id_driver",
+            "description": "<p>Driver Id.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "ride_status",
+            "description": "<p>Ride Status.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "server/apidoc.js",
+    "groupTitle": "Ride"
+  },
+  {
+    "type": "get",
+    "url": "/ride/history/{id}",
+    "title": "Get All History Ride Passenger",
+    "name": "Get_All_History_Ride_Passenger",
+    "group": "Ride",
+    "version": "0.0.0",
+    "filename": "server/apidoc.js",
+    "groupTitle": "Ride"
+  },
+  {
+    "type": "get",
+    "url": "/ride/history_favorite/{id}",
+    "title": "Get Favorite History Rides Passenger",
+    "name": "Get_Favorite_History_Rides_Passenger",
+    "group": "Ride",
     "version": "0.0.0",
     "filename": "server/apidoc.js",
     "groupTitle": "Ride"
