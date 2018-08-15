@@ -3,9 +3,8 @@ const router = express.Router();
 const Database = require("../database/drivpass");
 const DatabaseRide = require("../database/ride");
 const DatabaseDelivery = require("../database/delivery");
-const DatabaseLocation = require("../database/locations");
+const DatabaseLocation = require("../database/location");
 router
-
   .get("/", async (req, res, next) => {
     try {
       res.json({ saludo: "hola mundo" });
@@ -32,6 +31,20 @@ router
     }
   })
 
+
+  /**
+    * @api {post} /user/add Register
+    * @apiName Register
+    * @apiGroup Drivpass
+    *
+    * @apiParam {String} name Users name.
+    * @apiParam {String} phone Users phone.
+    * @apiParam {String} email Users email.
+    * @apiParam {String} city Users city.
+    *
+    * @apiSuccess {String} firstname Firstname of the User.
+    * @apiSuccess {String} lastname  Lastname of the User.
+  */
   .post("/add", async (req, res, next) => {
     try {
 
@@ -173,8 +186,57 @@ router
       };
       const id_drivpass = drivpass.id;
 
-      const put = await Database.update( parameters, id_drivpass);
+      const put = await Database.update(parameters, id_drivpass);
       return res.status(200).json({ success: true });
+
+    } catch (e) {
+      next(e);
+    }
+  })
+
+  .put("/edit/:id", async (req, res, next) => {
+    try {
+
+      const id = req.params.id;
+      const params = req.body;
+      const drivpass = await Database.selectById(id);
+      if (drivpass == null) return res.status(200).json({ message: "User doesn´t exist" });
+      const parameters = {
+        name: params.name || drivpass.name,
+        phone: params.phone || drivpass.phone,
+        email: params.email || drivpass.email,
+        city: params.city || drivpass.city,
+        password: params.password || drivpass.password,
+        image: params.image || drivpass.image,
+        video: params.video || drivpass.video,
+        auth_sms: params.auth_sms || drivpass.auth_sms,
+        reg_id: params.reg_id || drivpass.reg_id,
+        status_profile: params.status_profile || drivpass.status_profile,
+        btoken: params.btoken || drivpass.btoken,
+        led_status: params.led_status || drivpass.led_status,
+        status: params.status || drivpass.status
+      };
+      const id_drivpass = drivpass.id;
+
+      const put = await Database.update(parameters, id_drivpass);
+      return res.status(200).json({ success: true });
+
+    } catch (e) {
+      next(e);
+    }
+  })
+
+
+  .post("/buytoken", async (req, res, next) => {
+    try {
+
+      const params = req.body
+      const drivpass = await Database.selectById(params.user_id);
+      if (drivpass == null) return res.status(200).json({ success: false, message: "User doesn´t exist" });
+
+      //const pay = await Database.insertPayToken(params)
+      const pay = await Database.insert(params)
+      return res.status(200).json({ success: true, message: "Pay succes!" })
 
     } catch (e) {
       next(e);

@@ -31,11 +31,22 @@ async function insertData(data) {
   }
 }
 
+async function deleteData(id_passenger, id_driver) {
+  // # TODO: NO RETORNA ID.
+  try {
+    const query = await FavoriteDriver.destroy({
+      where: { id_passenger: id_passenger, id_driver: id_driver }
+    });
+    return query.dataValues;
+  } catch (e) {
+    console.log(e);
+  }
+}
 
 exports.selectById = selectById;
 exports.insert = insert;
 exports.insertData = insertData;
-
+exports.deleteData = deleteData;
 
 
 

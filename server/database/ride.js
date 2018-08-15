@@ -28,7 +28,7 @@ async function all() {
 }
 
 async function selectByUser(id_user, user_type) {
-  console.log("IN HERE+++++++++++",id_user,user_type)
+  console.log("IN HERE+++++++++++", id_user, user_type)
   try {
     let query;
     if (user_type == 1) {
@@ -36,7 +36,41 @@ async function selectByUser(id_user, user_type) {
     } else {
       query = await Ride.find({ where: { id_passenger: id_user } });
     }
-    
+
+    if (query != null && query.dataValues != null) {
+      return query.dataValues;
+    } else {
+      return null;
+    }
+
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+async function selectByPassenger(id_passenger) {
+  try {
+    const query = await Ride.find({
+      where: { id_passenger: id_passenger, status: 1 }
+    });
+
+    if (query != null && query.dataValues != null) {
+      return query.dataValues;
+    } else {
+      return null;
+    }
+
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+async function selectById(id_ride) {
+  try {
+    const query = await Ride.find({
+      where: { id: id_ride, status: 1 }
+    });
+
     if (query != null && query.dataValues != null) {
       return query.dataValues;
     } else {
@@ -48,39 +82,23 @@ async function selectByUser(id_user, user_type) {
   }
 }
 
-async function selectByPassenger(id_passenger) {
-  try {
-    const query = await Ride.find({
-      where: { id_passenger: id_passenger, status: 1 }
-    });
-    return query.dataValues;
-  } catch (e) {
-    console.log(e);
-  }
-}
-
-async function selectById(id_ride) {
-  try {
-    const query = await Ride.find({
-      where: { id: id_ride, status: 1 }
-    });
-    return query.dataValues;
-  } catch (e) {
-    console.log(e);
-  }
-}
-
 async function insert(data) {
   // # TODO: DEBE RETORNAR EL ID
   try {
     const query = await Ride.create(data);
-    return query.dataValues;
+
+    if (query != null && query.dataValues != null) {
+      return query.dataValues;
+    } else {
+      return null;
+    }
+
   } catch (e) {
     console.log(e);
   }
 }
 
-async function update(data,id_ride) {
+async function update(data, id_ride) {
   try {
     const query = await Ride.update(data, {
       returning: true,

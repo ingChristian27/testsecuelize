@@ -36,7 +36,7 @@ async function update(data, id_driver_ride) {
       where: { id: id_driver_ride }
     });
     return query;
-  } catch { }
+  } catch (e) { }
 }
 
 async function selectByEntity(id_ride) {

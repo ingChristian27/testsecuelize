@@ -24,15 +24,7 @@ async function diverTypes() {
   }
 }
 
-async function carMarks() {
-  try {
-    const query = await Configuration.findAll();
-    return query.dataValues;
-  } catch (e) {
-    console.log(e);
-  }
-}
+
 
 exports.payments = payments;
 exports.diverTypes = diverTypes;
-exports.carMarks = carMarks;

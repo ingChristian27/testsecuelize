@@ -1,5 +1,7 @@
 const Drivpass = require("../models").drivpass;
 const DrivpassUserType = require("../models").drivpass_user_type;
+const BuyToken = require("../models").buytoken;
+const SavedLocation = require("../models").saved_location;
 
 async function selectByEmail(email) {
   try {
@@ -48,7 +50,7 @@ async function selectById(delivery_id) {
     } else {
       return null;
     }
-    
+
   } catch (e) {
     console.log(e);
   }
@@ -122,7 +124,7 @@ async function drivpass_user_type(id_user, id_profile) {
   } catch (e) { }
 }
 
-async function drivpass_user_type_addProfile(data){
+async function drivpass_user_type_addProfile(data) {
   try {
     const query = await DrivpassUserType.create(data);
     return query.dataValues;
@@ -131,6 +133,81 @@ async function drivpass_user_type_addProfile(data){
   }
 }
 
+async function selectHistoryPayment(user_id) {
+  try {
+
+    const query = await BuyToken.find({ where: { user_id: user_id } });
+
+    /*
+      TODO: Campos, order y limit
+      .field("payment_method_id")
+      .field("n_tokes")
+      .field("total")
+      .field("payment_date")
+      .where("user_id ="+user_id)
+      .order("payment_date",false)
+      .limit(5)
+    */
+
+    if (query != null && query.dataValues != null) {
+      return query.dataValues;
+    } else {
+      return null;
+    }
+
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+
+async function getSavedLocation(user_id) {
+  try {
+
+    const query = await SavedLocation.find({ where: { user_id: user_id } });
+
+    /*
+      TODO: Campos, order y limit
+        .field("id")
+        .field("name")
+        .field("latitud")
+        .field("longitud")
+        .field("description")
+    */
+
+    if (query != null && query.dataValues != null) {
+      return query.dataValues;
+    } else {
+      return null;
+    }
+
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+
+async function insetSavedLocation(location) {
+  try {
+
+    const query = await SavedLocation.create(location);
+    return query.dataValues;
+
+    /*
+      TODO: Campos
+        .setFields(location)
+    */
+
+    if (query != null && query.dataValues != null) {
+      return query.dataValues;
+    } else {
+      return null;
+    }
+
+  } catch (e) {
+    console.log(e);
+  }
+}
 
 exports.selectByEmail = selectByEmail;
 exports.all = all;
@@ -142,7 +219,9 @@ exports.update = update;
 exports.selectByEmailAndPassword = selectByEmailAndPassword;
 exports.drivpass_user_type = drivpass_user_type;
 exports.drivpass_user_type_addProfile = drivpass_user_type_addProfile;
-
+exports.selectHistoryPayment = selectHistoryPayment;
+exports.getSavedLocation = getSavedLocation;
+exports.insetSavedLocation = insetSavedLocation;
 
 /*
   async function total_deliveries(){
