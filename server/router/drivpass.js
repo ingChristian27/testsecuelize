@@ -5,6 +5,7 @@ const DatabaseRide = require("../database/ride");
 const DatabaseDelivery = require("../database/delivery");
 const DatabaseLocation = require("../database/location");
 router
+
   .get("/", async (req, res, next) => {
     try {
       res.json({ saludo: "hola mundo" });
@@ -32,41 +33,7 @@ router
   })
 
 
-  /**
-    * @api {post} /user/add Register
-    * @apiName Register
-    * @apiGroup Drivpass
-    *
-    * @apiParam {String} name Users name.
-    * @apiParam {String} phone Users phone.
-    * @apiParam {String} email Users email.
-    * @apiParam {String} city Users city.
-    *
-    * @apiSuccess {String} firstname Firstname of the User.
-    * @apiSuccess {String} lastname  Lastname of the User.
-    * @apiSuccessExample Success-Response:
-    *     HTTP/1.1 200 OK
-    *       {
-    *         success: true,
-    *         message: "User created!",
-    *         insertId: post.id,
-    *         access_token: acces token
-    *       }
-    * 
-    * @apiSuccessExample Success-Response:
-    *     HTTP/1.1 203 OK
-    *     {
-    *       "message": "This email is already registered"
-    *     }
-    * 
-    * @apiError UserNotFound The id of the User was not found.
-    *
-    * @apiErrorExample Error-Response:
-    *   HTTP/1.1 404 Not Found
-    *     {
-    *       "error": "UserNotFound"
-    *     }
-  */
+  
   .post("/add", async (req, res, next) => {
     try {
 

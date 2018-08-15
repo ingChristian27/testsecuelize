@@ -3,18 +3,6 @@ const router = express.Router();
 const Database = require("../database/drivpass");
 router
 
-
-    /**
-        * @api {post} /login Login
-        * @apiName Login
-        * @apiGroup Authentication
-        *
-        * @apiParam {String} email Users email.
-        * @apiParam {String} password Users password.
-        *
-        * @apiSuccess {String} firstname Firstname of the User.
-        * @apiSuccess {String} lastname  Lastname of the User.
-    */
     .post("/", async (req, res) => {
         try {
             console.log("login/");
