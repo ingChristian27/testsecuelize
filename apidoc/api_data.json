@@ -107,7 +107,38 @@
             "description": "<p>Lastname of the User.</p>"
           }
         ]
-      }
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n  {\n    success: true,\n    message: \"User created!\",\n    insertId: post.id,\n    access_token: acces token\n  }",
+          "type": "json"
+        },
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 203 OK\n{\n  \"message\": \"This email is already registered\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>The id of the User was not found.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 404 Not Found\n  {\n    \"error\": \"UserNotFound\"\n  }",
+          "type": "json"
+        }
+      ]
     },
     "version": "0.0.0",
     "filename": "server/router/drivpass.js",
