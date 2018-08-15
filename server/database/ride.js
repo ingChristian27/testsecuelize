@@ -12,7 +12,11 @@ const Ride = require("../models").ride;
 async function selectByRide(id_ride) {
   try {
     const query = await Ride.find({ where: { id: id_ride } });
-    return query.dataValues;
+    if (query != null && query.dataValues != null) {
+      return query.dataValues;
+    } else {
+      return null;
+    }
   } catch (e) {
     console.log(e);
   }
@@ -21,7 +25,11 @@ async function selectByRide(id_ride) {
 async function all() {
   try {
     const query = await Ride.findAll();
-    return query.dataValues;
+    if (query != null && query.dataValues != null) {
+      return query.dataValues;
+    } else {
+      return null;
+    }
   } catch (e) {
     console.log(e);
   }
@@ -76,7 +84,7 @@ async function selectById(id_ride) {
     } else {
       return null;
     }
-    
+
   } catch (e) {
     console.log(e);
   }
@@ -104,7 +112,11 @@ async function update(data, id_ride) {
       returning: true,
       where: { id: id_ride }
     });
-    return query;
+    if (query != null && query.dataValues != null) {
+      return query.dataValues;
+    } else {
+      return null;
+    }
   } catch (e) { }
 }
 

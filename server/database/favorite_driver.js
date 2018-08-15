@@ -5,7 +5,11 @@ async function selectById(id_passenger, id_driver) {
     const query = await FavoriteDriver.find({
       where: { id_passenger: id_passenger, id_driver: id_driver }
     });
-    return query.dataValues;
+    if (query != null && query.dataValues != null) {
+      return query.dataValues;
+    } else {
+      return null;
+    }
   } catch (e) {
     console.log(e);
   }
@@ -15,7 +19,11 @@ async function insert(data) {
   // # TODO: DEBE RETORNAR EL ID
   try {
     const query = await FavoriteDriver.create(data);
-    return query.dataValues;
+    if (query != null && query.dataValues != null) {
+      return query.dataValues;
+    } else {
+      return null;
+    }
   } catch (e) {
     console.log(e);
   }
@@ -25,7 +33,11 @@ async function insertData(data) {
   // # TODO: NO RETORNA ID.
   try {
     const query = await FavoriteDriver.create(data);
-    return query.dataValues;
+    if (query != null && query.dataValues != null) {
+      return query.dataValues;
+    } else {
+      return null;
+    }
   } catch (e) {
     console.log(e);
   }
@@ -37,7 +49,11 @@ async function deleteData(id_passenger, id_driver) {
     const query = await FavoriteDriver.destroy({
       where: { id_passenger: id_passenger, id_driver: id_driver }
     });
-    return query.dataValues;
+    if (query != null && query.dataValues != null) {
+      return query.dataValues;
+    } else {
+      return null;
+    }
   } catch (e) {
     console.log(e);
   }

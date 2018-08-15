@@ -5,7 +5,11 @@ async function verify(id_driver) {
     const query = await DeliveryDriver.find({
       where: { id_driver: id_driver }
     });
-    return query.dataValues;
+    if (query != null && query.dataValues != null) {
+      return query.dataValues;
+    } else {
+      return null;
+    }
   } catch (e) {
     console.log(e);
   }
@@ -17,7 +21,11 @@ async function update(data, id_delivery_driver) {
       returning: true,
       where: { id: id_delivery_driver }
     });
-    return query.dataValues;
+    if (query != null && query.dataValues != null) {
+      return query.dataValues;
+    } else {
+      return null;
+    }
   } catch (e) {
     console.log(e);
   }

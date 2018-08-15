@@ -36,7 +36,11 @@ async function selectByEmailAndPassword(email, password) {
 async function all() {
   try {
     const query = await Drivpass.findAll();
-    return query.dataValues;
+    if (query != null && query.dataValues != null) {
+      return query.dataValues;
+    } else {
+      return null;
+    }
   } catch (e) {
     console.log(e);
   }
@@ -59,7 +63,11 @@ async function insert(data) {
   // # TODO: DEBE RETORNAR EL ID
   try {
     const query = await Drivpass.create(data);
-    return query.dataValues;
+    if (query != null && query.dataValues != null) {
+      return query.dataValues;
+    } else {
+      return null;
+    }
   } catch (e) {
     console.log(e);
   }
@@ -73,7 +81,11 @@ async function selectByUser(id_user, user_type) {
     } else {
       query = await Drivpass.find({ where: { id_user: id_user } });
     }
-    return query;
+    if (query != null && query.dataValues != null) {
+      return query.dataValues;
+    } else {
+      return null;
+    }
   } catch (e) {
     console.log(e);
   }
@@ -83,7 +95,11 @@ async function selectByDriver(driver_id) {
     const query = await Drivpass.find({
       where: { id_driver: driver_id, status: 1 }
     });
-    return query.dataValues;
+    if (query != null && query.dataValues != null) {
+      return query.dataValues;
+    } else {
+      return null;
+    }
   } catch (e) {
     console.log(e);
   }
@@ -94,7 +110,11 @@ async function selectByPassenger(user_id) {
     const query = await Drivpass.find({
       where: { id_user: user_id, status: 1 }
     });
-    return query.dataValues;
+    if (query != null && query.dataValues != null) {
+      return query.dataValues;
+    } else {
+      return null;
+    }
   } catch (e) {
     console.log(e);
   }
@@ -105,7 +125,11 @@ async function update(data, id_delivery) {
       returning: true,
       where: { id: id_delivery }
     });
-    return query;
+    if (query != null && query.dataValues != null) {
+      return query.dataValues;
+    } else {
+      return null;
+    }
   } catch (e) { }
 }
 
@@ -120,14 +144,17 @@ async function drivpass_user_type(id_user, id_profile) {
     } else {
       return null;
     }
-    return query;
   } catch (e) { }
 }
 
 async function drivpass_user_type_addProfile(data) {
   try {
     const query = await DrivpassUserType.create(data);
-    return query.dataValues;
+    if (query != null && query.dataValues != null) {
+      return query.dataValues;
+    } else {
+      return null;
+    }
   } catch (e) {
     console.log(e);
   }
@@ -191,7 +218,6 @@ async function insetSavedLocation(location) {
   try {
 
     const query = await SavedLocation.create(location);
-    return query.dataValues;
 
     /*
       TODO: Campos

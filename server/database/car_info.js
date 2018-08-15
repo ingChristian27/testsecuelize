@@ -10,7 +10,11 @@ selectByEmail : (email) => {
 async function selectCar(id_user) {
   try {
     const query = await CarInfo.find({ where: { id_user: id_user } });
-    return query.dataValues;
+    if (query != null && query.dataValues != null) {
+      return query.dataValues;
+    } else {
+      return null;
+    }
   } catch (e) {
     console.log(e);
   }
@@ -19,7 +23,11 @@ async function selectCar(id_user) {
 async function insert(data) {
   try {
     const query = await CarInfo.create(data);
-    return query.dataValues;
+    if (query != null && query.dataValues != null) {
+      return query.dataValues;
+    } else {
+      return null;
+    }
   } catch (e) {
     console.log(e);
   }
@@ -29,7 +37,11 @@ async function getAll() {
     console.log("va a buscar los elementos...");
     const query = await CarInfo.find();
     console.log(query);
-    return query.dataValues;
+    if (query != null && query.dataValues != null) {
+      return query.dataValues;
+    } else {
+      return null;
+    }
   } catch (e) {
     console.log(e);
   }
@@ -38,7 +50,11 @@ async function getAll() {
 async function selectPlate(plate) {
   try {
     const query = await CarInfo.find({ where: { number: plate } });
-    return query.dataValues;
+    if (query != null && query.dataValues != null) {
+      return query.dataValues;
+    } else {
+      return null;
+    }
   } catch (e) {
     console.log(e);
   }
@@ -50,7 +66,11 @@ async function update(data, id_platecar) {
       returning: true,
       where: { id: id_platecar }
     });
-    return query.dataValues;
+    if (query != null && query.dataValues != null) {
+      return query.dataValues;
+    } else {
+      return null;
+    }
   } catch (e) {
     console.log(e);
   }

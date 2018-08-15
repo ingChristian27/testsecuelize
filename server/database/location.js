@@ -3,7 +3,7 @@ const Locations = require("../models").location;
 async function selectById(id_user) {
   try {
     const query = await Locations.find({ where: { id_user: id_user } });
-    
+
     if (query != null && query.dataValues != null) {
       return query.dataValues;
     } else {
@@ -19,7 +19,11 @@ async function insert(data) {
   // # TODO: DEBE RETORNAR EL ID
   try {
     const query = await Locations.create(data);
-    return query.dataValues;
+    if (query != null && query.dataValues != null) {
+      return query.dataValues;
+    } else {
+      return null;
+    }
   } catch (e) {
     console.log(e);
   }
@@ -31,7 +35,11 @@ async function update(data, id_user) {
       returning: true,
       where: { id_user: id_user }
     });
-    return query;
+    if (query != null && query.dataValues != null) {
+      return query.dataValues;
+    } else {
+      return null;
+    }
   } catch (e) { }
 }
 
@@ -42,7 +50,11 @@ async function inhabilitate_driver() {
       returning: true,
       where: { id_user: $1 }
     });
-    return query;
+    if (query != null && query.dataValues != null) {
+      return query.dataValues;
+    } else {
+      return null;
+    }
   } catch (e) { }
 }
 
@@ -53,7 +65,11 @@ async function habilitate_driver() {
       returning: true,
       where: { id_user: $1 }
     });
-    return query;
+    if (query != null && query.dataValues != null) {
+      return query.dataValues;
+    } else {
+      return null;
+    }
   } catch (e) { }
 }
 

@@ -12,7 +12,11 @@ const RideDriver = require("../models").ride_driver;
 async function selectRideDriver(id_driver_ride) {
   try {
     const query = await RideDriver.find({ where: { id: id_driver_ride } });
-    return query.dataValues;
+    if (query != null && query.dataValues != null) {
+      return query.dataValues;
+    } else {
+      return null;
+    }
   } catch (e) {
     console.log(e);
   }
@@ -23,7 +27,11 @@ async function verify(id_driver, id_ride) {
     const query = await RideDriver.find({
       where: { id_driver: id_driver, id_ride: id_ride }
     });
-    return query.dataValues;
+    if (query != null && query.dataValues != null) {
+      return query.dataValues;
+    } else {
+      return null;
+    }
   } catch (e) {
     console.log(e);
   }
@@ -35,7 +43,11 @@ async function update(data, id_driver_ride) {
       returning: true,
       where: { id: id_driver_ride }
     });
-    return query;
+    if (query != null && query.dataValues != null) {
+      return query.dataValues;
+    } else {
+      return null;
+    }
   } catch (e) { }
 }
 
@@ -46,7 +58,11 @@ async function selectByEntity(id_ride) {
       where: { id_ride: id_ride },
       attributes: ['id_driver']
     });
-    return query.dataValues;
+    if (query != null && query.dataValues != null) {
+      return query.dataValues;
+    } else {
+      return null;
+    }
   } catch (e) {
     console.log(e);
   }
@@ -56,7 +72,11 @@ async function lookingForDrivers(data) {
   // # TODO: NO RETORNA ID. REVISAR FUNCION, NOMBRE NO CONCUERDA CON INSERT
   try {
     const query = await RideDriver.create(data);
-    return query.dataValues;
+    if (query != null && query.dataValues != null) {
+      return query.dataValues;
+    } else {
+      return null;
+    }
   } catch (e) {
     console.log(e);
   }

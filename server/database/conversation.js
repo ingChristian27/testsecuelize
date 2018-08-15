@@ -7,7 +7,11 @@ const Conversation = require("../models").conversation;
 async function insert(data) {
   try {
     const query = await Conversation.create(data);
-    return query.dataValues;
+    if (query != null && query.dataValues != null) {
+      return query.dataValues;
+    } else {
+      return null;
+    }
   } catch (e) {
     console.log(e);
   }
