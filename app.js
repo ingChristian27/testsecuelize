@@ -25,6 +25,7 @@ const SavedLocation = require("./server/router/saved_location");
 const Favorite = require("./server/router/favorite");
 const ReferDriver = require("./server/router/refer_driver");
 const Delivery = require("./server/router/delivery");
+const Country = require("./server/router/countries");
 
 const carRouter = require("./server/router/car");
 const drivpass = require("./server/router/drivpass");
@@ -56,6 +57,7 @@ app.use("/saved_location", SavedLocation);
 app.use("/favorite", Favorite);
 app.use("/refer_driver", ReferDriver);
 app.use("/delivery", Delivery);
+app.use("/countries", Country);
 
 app.use("/car", carRouter);
 app.use("/drivpass", drivpass);

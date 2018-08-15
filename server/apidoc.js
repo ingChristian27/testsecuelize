@@ -154,4 +154,18 @@
     * @apiParam {Object} UserVideo map of UserVideo maps
     * @apiParam {Object} UserVideo.id Id of UserVideo properties
     * @apiParam {Object} UserVideo.video Video of UserVideo properties
+    * @apiParam {Object} UserStatus map of UserStatus maps
+    * @apiParam {Object} UserStatus.id Id of UserStatus properties
+    * @apiParam {Object} UserStatus.status_profile Status of UserStatus properties
+    * @apiParam {Object} BToken map of BToken maps
+    * @apiParam {Object} BToken.id Id of BToken properties
+    * @apiParam {Object} BToken.btoken btoken of BToken properties
+    * @apiParam {Object} Profile map of Profile maps
+    * @apiParam {Object} Profile.phone Phone of Profile properties
+    * @apiParam {Object} Profile.name Name of Profile properties
+    * @apiParam {Object} Profile.email Email of Profile properties
+    * @apiParam {Object} LedProfile map of LedProfile maps
+    * @apiParam {Object} LedProfile.id Id of LedProfile properties
+    * @apiParam {Object} LedProfile.led_status Led Status of LedProfile properties
+    
     */

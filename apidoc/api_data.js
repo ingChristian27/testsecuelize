@@ -484,6 +484,97 @@ define({ "api": [
             "optional": false,
             "field": "UserVideo.video",
             "description": "<p>Video of UserVideo properties</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Object",
+            "optional": false,
+            "field": "UserStatus",
+            "description": "<p>map of UserStatus maps</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Object",
+            "optional": false,
+            "field": "UserStatus.id",
+            "description": "<p>Id of UserStatus properties</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Object",
+            "optional": false,
+            "field": "UserStatus.status_profile",
+            "description": "<p>Status of UserStatus properties</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Object",
+            "optional": false,
+            "field": "BToken",
+            "description": "<p>map of BToken maps</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Object",
+            "optional": false,
+            "field": "BToken.id",
+            "description": "<p>Id of BToken properties</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Object",
+            "optional": false,
+            "field": "BToken.btoken",
+            "description": "<p>btoken of BToken properties</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Object",
+            "optional": false,
+            "field": "Profile",
+            "description": "<p>map of Profile maps</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Object",
+            "optional": false,
+            "field": "Profile.phone",
+            "description": "<p>Phone of Profile properties</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Object",
+            "optional": false,
+            "field": "Profile.name",
+            "description": "<p>Name of Profile properties</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Object",
+            "optional": false,
+            "field": "Profile.email",
+            "description": "<p>Email of Profile properties</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Object",
+            "optional": false,
+            "field": "LedProfile",
+            "description": "<p>map of LedProfile maps</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Object",
+            "optional": false,
+            "field": "LedProfile.id",
+            "description": "<p>Id of LedProfile properties</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Object",
+            "optional": false,
+            "field": "LedProfile.led_status",
+            "description": "<p>Led Status of LedProfile properties</p>"
           }
         ]
       }
