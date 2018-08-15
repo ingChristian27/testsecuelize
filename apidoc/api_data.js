@@ -23,7 +23,95 @@ define({ "api": [
             "description": "<p>Users password.</p>"
           }
         ]
-      }
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\"email\": \"testingmail@mail.com\",\"password\": \"123456\"}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "access_token",
+            "description": "<p>Access Token.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "user_id",
+            "description": "<p>User Id.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "status_profile",
+            "description": "<p>Status Profile.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 - OK\n{\"access_token\": \"TEST123\",\"user_id\": 1,\"status_profile\": 1}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "IncorrectPassword",
+            "description": "<p>The password is incorrect (We suggest to just respond with invalid username or password - Security Issue -).</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "Incorrectuser",
+            "description": "<p>The username doesn´t exist (We suggest to just respond with invalid username or password - Security Issue -).</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "RequiredData",
+            "description": "<p>Any required input is null or blank.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "DataValidation",
+            "description": "<p>When any input field is not present in request, response is not estandarized, not even json format. We wold do it.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Incorrect-Password-Response:",
+          "content": "  HTTP/1.1 404 - Not Found\n{\"message\": \"Incorrect password!\"}",
+          "type": "json"
+        },
+        {
+          "title": "Incorrect-User-Response:",
+          "content": "  HTTP/1.1 403 - Forbidden\n{\"message\": \"User doesn´t exist!\"}",
+          "type": "json"
+        },
+        {
+          "title": "Required-Data-Response:",
+          "content": "  HTTP/1.1 400 - Bad Request\n{\"message\": \"email and password are required\"}",
+          "type": "json"
+        }
+      ]
     },
     "version": "0.0.0",
     "filename": "server/apidoc.js",
@@ -31,10 +119,19 @@ define({ "api": [
   },
   {
     "type": "get",
-    "url": "/car/info{id}",
+    "url": "/car/info/{id}",
     "title": "Get Car Info",
     "name": "Get_Car_Info",
     "group": "Car",
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 - OK\n{\n    \"success\":true,\n    \"car\": {\n        \"id\": 1,\n        \"id_user\": 2,\n        \"number\": \"MUM926\",\n        \"year\": \"2018\",\n        \"make\": \"1\",\n        \"model\": \"Sonic\",\n        \"color\": \"black\",\n        \"plate\": \"AAA\",\n        \"status\": 1,\n        \"createdAt\": \"2018-01-01T00:00:00.000Z\",\n        \"updatedAt\": \"2018-01-01T00:00:00.000Z\"\n    }\n}",
+          "type": "json"
+        }
+      ]
+    },
     "version": "0.0.0",
     "filename": "server/apidoc.js",
     "groupTitle": "Car"
@@ -569,8 +666,8 @@ define({ "api": [
   },
   {
     "type": "get",
-    "url": "/client_token",
-    "title": "Get Token Payment",
+    "url": "/client_token_id/{id}",
+    "title": "Get Token Payment ID",
     "name": "Get_Token_Payment",
     "group": "Payment",
     "version": "0.0.0",
@@ -579,8 +676,8 @@ define({ "api": [
   },
   {
     "type": "get",
-    "url": "/client_token_id/{id}",
-    "title": "Get Token Payment ID",
+    "url": "/client_token",
+    "title": "Get Token Payment",
     "name": "Get_Token_Payment",
     "group": "Payment",
     "version": "0.0.0",
@@ -1078,12 +1175,12 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n  {\n    success: true,\n    message: \"User created!\",\n    insertId: post.id,\n    access_token: acces token\n  }",
+          "content": "HTTP/1.1 200 - OK\n  {\n    success: true,\n    message: \"User created!\",\n    insertId: post.id,\n    access_token: acces token\n  }",
           "type": "json"
         },
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 203 OK\n{\n  \"message\": \"This email is already registered\"\n}",
+          "content": "HTTP/1.1 203 - OK\n{\n  \"message\": \"This email is already registered\"\n}",
           "type": "json"
         }
       ]
@@ -1159,14 +1256,14 @@ define({ "api": [
           },
           {
             "group": "Parameter",
-            "type": "Object",
+            "type": "String",
             "optional": false,
             "field": "UserImage.id",
             "description": "<p>Id of UserImage properties</p>"
           },
           {
             "group": "Parameter",
-            "type": "Object",
+            "type": "String",
             "optional": false,
             "field": "UserImage.image",
             "description": "<p>Image of UserImage properties</p>"
@@ -1180,14 +1277,14 @@ define({ "api": [
           },
           {
             "group": "Parameter",
-            "type": "Object",
+            "type": "String",
             "optional": false,
             "field": "UserVideo.id",
             "description": "<p>Id of UserVideo properties</p>"
           },
           {
             "group": "Parameter",
-            "type": "Object",
+            "type": "String",
             "optional": false,
             "field": "UserVideo.video",
             "description": "<p>Video of UserVideo properties</p>"
@@ -1201,14 +1298,14 @@ define({ "api": [
           },
           {
             "group": "Parameter",
-            "type": "Object",
+            "type": "String",
             "optional": false,
             "field": "UserStatus.id",
             "description": "<p>Id of UserStatus properties</p>"
           },
           {
             "group": "Parameter",
-            "type": "Object",
+            "type": "String",
             "optional": false,
             "field": "UserStatus.status_profile",
             "description": "<p>Status of UserStatus properties</p>"
@@ -1222,14 +1319,14 @@ define({ "api": [
           },
           {
             "group": "Parameter",
-            "type": "Object",
+            "type": "String",
             "optional": false,
             "field": "BToken.id",
             "description": "<p>Id of BToken properties</p>"
           },
           {
             "group": "Parameter",
-            "type": "Object",
+            "type": "String",
             "optional": false,
             "field": "BToken.btoken",
             "description": "<p>btoken of BToken properties</p>"
@@ -1243,21 +1340,21 @@ define({ "api": [
           },
           {
             "group": "Parameter",
-            "type": "Object",
+            "type": "String",
             "optional": false,
             "field": "Profile.phone",
             "description": "<p>Phone of Profile properties</p>"
           },
           {
             "group": "Parameter",
-            "type": "Object",
+            "type": "String",
             "optional": false,
             "field": "Profile.name",
             "description": "<p>Name of Profile properties</p>"
           },
           {
             "group": "Parameter",
-            "type": "Object",
+            "type": "String",
             "optional": false,
             "field": "Profile.email",
             "description": "<p>Email of Profile properties</p>"
@@ -1271,14 +1368,14 @@ define({ "api": [
           },
           {
             "group": "Parameter",
-            "type": "Object",
+            "type": "String",
             "optional": false,
             "field": "LedProfile.id",
             "description": "<p>Id of LedProfile properties</p>"
           },
           {
             "group": "Parameter",
-            "type": "Object",
+            "type": "String",
             "optional": false,
             "field": "LedProfile.led_status",
             "description": "<p>Led Status of LedProfile properties</p>"

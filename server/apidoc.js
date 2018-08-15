@@ -5,6 +5,61 @@
     *
     * @apiParam {String} email Users email.
     * @apiParam {String} password Users password.
+    * @apiParamExample {json} Request-Example:
+    * {"email": "testingmail@mail.com","password": "123456"}
+    * 
+    * @apiSuccess {String} access_token Access Token.
+    * @apiSuccess {String} user_id User Id.
+    * @apiSuccess {String} status_profile Status Profile.
+    * 
+    * @apiSuccessExample Success-Response:
+    *   HTTP/1.1 200 - OK
+    *   {"access_token": "TEST123","user_id": 1,"status_profile": 1}
+    * 
+    * @apiError IncorrectPassword The password is incorrect (We suggest to just respond with invalid username or password - Security Issue -).
+    *
+    * @apiErrorExample Incorrect-Password-Response:
+    *   HTTP/1.1 404 - Not Found
+    * {"message": "Incorrect password!"}
+    * 
+    * @apiError Incorrectuser The username doesn´t exist (We suggest to just respond with invalid username or password - Security Issue -).
+    *
+    * @apiErrorExample Incorrect-User-Response:
+    *   HTTP/1.1 403 - Forbidden
+    * {"message": "User doesn´t exist!"}
+    * 
+    * @apiError RequiredData Any required input is null or blank.
+    *
+    * @apiErrorExample Required-Data-Response:
+    *   HTTP/1.1 400 - Bad Request
+    * {"message": "email and password are required"}
+    * 
+    * @apiError DataValidation When any input field is not present in request, response is not estandarized, not even json format. We wold do it.
+*/
+
+/**
+    * @api {get} /car/info/{id} Get Car Info
+    * @apiName Get Car Info
+    * @apiGroup Car
+    * @apiSuccessExample Success-Response:
+    *   HTTP/1.1 200 - OK
+    *   {
+    *       "success":true,
+    *       "car": {
+    *           "id": 1,
+    *           "id_user": 2,
+    *           "number": "MUM926",
+    *           "year": "2018",
+    *           "make": "1",
+    *           "model": "Sonic",
+    *           "color": "black",
+    *           "plate": "AAA",
+    *           "status": 1,
+    *           "createdAt": "2018-01-01T00:00:00.000Z",
+    *           "updatedAt": "2018-01-01T00:00:00.000Z"
+    *       }
+    *   }
+    * 
 */
 
 /**
@@ -20,7 +75,7 @@
     * @apiSuccess {String} firstname Firstname of the User.
     * @apiSuccess {String} lastname  Lastname of the User.
     * @apiSuccessExample Success-Response:
-    *     HTTP/1.1 200 OK
+    *     HTTP/1.1 200 - OK
     *       {
     *         success: true,
     *         message: "User created!",
@@ -29,7 +84,7 @@
     *       }
     * 
     * @apiSuccessExample Success-Response:
-    *     HTTP/1.1 203 OK
+    *     HTTP/1.1 203 - OK
     *     {
     *       "message": "This email is already registered"
     *     }
@@ -149,24 +204,24 @@
     *
     * @apiParam {String} resource Resource part name.
     * @apiParam {Object} UserImage map of UserImage maps
-    * @apiParam {Object} UserImage.id Id of UserImage properties
-    * @apiParam {Object} UserImage.image Image of UserImage properties
+    * @apiParam {String} UserImage.id Id of UserImage properties
+    * @apiParam {String} UserImage.image Image of UserImage properties
     * @apiParam {Object} UserVideo map of UserVideo maps
-    * @apiParam {Object} UserVideo.id Id of UserVideo properties
-    * @apiParam {Object} UserVideo.video Video of UserVideo properties
+    * @apiParam {String} UserVideo.id Id of UserVideo properties
+    * @apiParam {String} UserVideo.video Video of UserVideo properties
     * @apiParam {Object} UserStatus map of UserStatus maps
-    * @apiParam {Object} UserStatus.id Id of UserStatus properties
-    * @apiParam {Object} UserStatus.status_profile Status of UserStatus properties
+    * @apiParam {String} UserStatus.id Id of UserStatus properties
+    * @apiParam {String} UserStatus.status_profile Status of UserStatus properties
     * @apiParam {Object} BToken map of BToken maps
-    * @apiParam {Object} BToken.id Id of BToken properties
-    * @apiParam {Object} BToken.btoken btoken of BToken properties
+    * @apiParam {String} BToken.id Id of BToken properties
+    * @apiParam {String} BToken.btoken btoken of BToken properties
     * @apiParam {Object} Profile map of Profile maps
-    * @apiParam {Object} Profile.phone Phone of Profile properties
-    * @apiParam {Object} Profile.name Name of Profile properties
-    * @apiParam {Object} Profile.email Email of Profile properties
+    * @apiParam {String} Profile.phone Phone of Profile properties
+    * @apiParam {String} Profile.name Name of Profile properties
+    * @apiParam {String} Profile.email Email of Profile properties
     * @apiParam {Object} LedProfile map of LedProfile maps
-    * @apiParam {Object} LedProfile.id Id of LedProfile properties
-    * @apiParam {Object} LedProfile.led_status Led Status of LedProfile properties
+    * @apiParam {String} LedProfile.id Id of LedProfile properties
+    * @apiParam {String} LedProfile.led_status Led Status of LedProfile properties
 */
 
 /**
@@ -362,12 +417,6 @@
     * @apiParam {String} longitude_end Longitude End.
     * @apiParam {String} price Price.
     * @apiParam {String} accept_counteroffer Accept Counteroffer.
-*/
-
-/**
-    * @api {get} /car/info{id} Get Car Info
-    * @apiName Get Car Info
-    * @apiGroup Car
 */
 
 /**
