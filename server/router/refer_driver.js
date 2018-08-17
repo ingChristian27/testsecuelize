@@ -12,8 +12,12 @@ router
             if (user_available == null) return res.status(200).json({ success: false, message: "User is not a driver!" })
 
             const car = await DatabaseCarInfo.selectPlate(plate);
-            const id_refer = car.id_user;
             if (car == null) return res.status(200).json({ success: false, message: "Code driver no found!" });
+            const id_refer = car.id_user;
+
+            //TODO: ACEPTA PLACA AUNQUE NO COINCIDA CON USUARIO
+            //TODO: REVISAR SI SENTENCIA DE ABAJO ESTA COMENTADA EN COSDIGO ORIGINAL. SE NECESITA REFER
+            
             //        const refer = await connection.query(queries.referById(id_driver,id_refer));
             //      if(refer.rows.length>0)
             //    return res.status(200).json({success: false,message:"You already have a driver code!"});  

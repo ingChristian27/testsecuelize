@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 const Database = require("../database/delivery");
 
+const moment = require('moment');
+
 router
 
     .post("/add", async (req, res) => {
@@ -11,8 +13,9 @@ router
             const params = req.body;
             const delivery = await Database.selectById(params.id_user);
             //        if(delivery.rows.length > 0) return res.status(200).json({details: "You already have a delivery in progress!"}); 
-            const post = await Database.insert( params);
-            const deliveryResult = await Database.selectById(post.id);
+            
+            const deliveryResult = await Database.insert( params);
+
             /*  const assign = await deliveryHelper.send(params.latitude_start, params.longitude_start);
             if(assign == 0) return res.status(500).json({details: "something went wrong, cannot post delivery"});
             if(assign == -1) return res.status(200).json({details: "There are no drivers availables!"});*/

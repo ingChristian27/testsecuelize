@@ -48,13 +48,13 @@ router
       const id = req.params.id;
       const params = req.body;
       const drivpass = await DatabaseDrivpass.selectById(id);
-      if (drivpass == 0) return res.status(404).json({ details: "user not found" });
+      if (drivpass == null) return res.status(404).json({ details: "user not found" });
 
       const car = await Database.selectCar(id);
-      if (car != 0) return res.status(202).json({ details: "This user already have a car" });
+      if (car != null) return res.status(202).json({ details: "This user already have a car" });
 
       const exist_plate = await Database.selectPlate(params.number);
-      if (exist_plate != 0) return res.status(203).json({ details: "The plate already exists" });
+      if (exist_plate != null) return res.status(203).json({ details: "The plate already exists" });
 
       const parameters = {
         id_user: id,
@@ -62,7 +62,11 @@ router
         year: params.year,
         make: params.make,
         model: params.model,
-        color: params.color
+        color: params.color,
+
+        /* TODO: PARAMETROS FORZADOS (NO ESTABAN DEFINIDOS) */
+        plate: params.number,
+        status: 1,
       };
 
       const post = await Database.insert(parameters);

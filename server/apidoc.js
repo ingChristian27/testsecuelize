@@ -60,7 +60,168 @@
     *       }
     *   }
     * 
+    @apiErrorExample No-Data-Response:
+    *   HTTP/1.1 200 - OK
+    * {
+    *   "success": false,
+    *   "message": "Car user doesn´t exist!"
+    * }
+    * 
 */
+
+/**
+    * @api {get} /car_marks Obtain Car Marks
+    * @apiName Obtain Car Marks
+    * @apiGroup Car
+    * @apiSuccessExample Success-Response:
+    *   HTTP/1.1 200 - OK
+        [
+        {
+            "id": 3,
+            "name": "Chevrolet",
+            "createdAt": "2018-01-01T00:00:00.000Z",
+            "updatedAt": "2018-01-01T00:00:00.000Z"
+        },
+        {
+            "id": 4,
+            "name": "Mazda",
+            "createdAt": "2018-01-01T00:00:00.000Z",
+            "updatedAt": "2018-01-01T00:00:00.000Z"
+        },
+        {
+            "id": 5,
+            "name": "Honda",
+            "createdAt": "2018-01-01T00:00:00.000Z",
+            "updatedAt": "2018-01-01T00:00:00.000Z"
+        },
+        {
+            "id": 6,
+            "name": "Hyundai",
+            "createdAt": "2018-01-01T00:00:00.000Z",
+            "updatedAt": "2018-01-01T00:00:00.000Z"
+        },
+        {
+            "id": 7,
+            "name": "Nissan",
+            "createdAt": "2018-01-01T00:00:00.000Z",
+            "updatedAt": "2018-01-01T00:00:00.000Z"
+        }
+        ]
+    * 
+    @apiErrorExample No-Data-Response:
+    *   HTTP/1.1 401 - Unauthorized
+    *   {
+    *       "message": "I don`t have car marks"
+    *   }
+*/
+
+/**
+    * @api {post} /car/add/{id} Save Car Info Driver
+    * @apiName Save Car Info Driver
+    * @apiGroup Car
+    *
+    * @apiParam {String} number Car Plate.
+    * @apiParam {String} year Car Year.
+    * @apiParam {String} make Make.
+    * @apiParam {String} model Car model.
+    * @apiParam {String} color Car color.
+    * 
+    * @apiParamExample {json} Request-Example:
+    * {"number": "MUM92","year": "2018","make": "String","model": "String","color": "String"}
+    * 
+    * @apiSuccessExample Success-Response:
+    *   HTTP/1.1 200 - OK
+    *   {
+    *       "success": true,
+    *       "insertId": 21
+    *   }
+    * 
+    * @apiErrorExample User-Not-Found:
+    *   HTTP/1.1 404 - Not Found
+    *   {
+    *       "details": "user not found"
+    *   }
+    * 
+    * @apiErrorExample User-Has-Car:
+    *   HTTP/1.1 202 - Accepted
+    *   {
+    *       "details": "This user already have a car"
+    *   }
+    * 
+    * @apiErrorExample Plate-Exists:
+    *   HTTP/1.1 203 - Non-Authoritative Information
+    *   {
+    *       "details": "The plate already exists"
+    *   }
+*/
+
+/**
+    * @api {get} /countries Obtain countries
+    * @apiName Obtain countries
+    * @apiGroup Country
+*/
+
+/**
+    * @api {post} /delivery/add Add Delivery Passenger
+    * @apiName Add Delivery Passenger
+    * @apiGroup Delivery
+    * 
+    * @apiParam {String} id_user User Id.
+    * @apiParam {String} package_details Package Details.
+    * @apiParam {String} location_start Location Start.
+    * @apiParam {String} location_end Location End.
+    * @apiParam {String} latitude_start Latitude Start.
+    * @apiParam {String} longitude_start Longitude Start.
+    * @apiParam {String} latitude_end Latitude End.
+    * @apiParam {String} longitude_end Longitude End.
+    * @apiParam {String} price Price.
+    * @apiParam {String} accept_counteroffer Accept Counteroffer.
+    * 
+    * @apiParamExample {json} Request-Example:
+    * {
+    *   "id_user": 123,
+    *   "package_details": "String",
+    *   "location_start": "String",
+    *   "location_end": "String",
+    *   "latitude_start": 1,
+    *   "latitude_end": 1,
+    *   "price": 300,
+    *   "accept_counteroffer": "String"
+    * }
+    *
+*/
+
+/**
+    * @api {post} /refer_driver Add Reder Driver
+    * @apiName Add Reder Driver
+    * @apiGroup Driver
+    * 
+    * @apiParam {String} id_driver Driver Id.
+    * @apiParam {String} plate Driver Plate.
+    * 
+    * @apiErrorExample User-Not-Driver:
+    *   HTTP/1.1 200 - OK
+    *   {
+    *       "success": false,
+    *       "message": "User is not a driver!
+    *   }
+    * 
+    * @apiErrorExample Plate-Not-Found:
+    *   HTTP/1.1 200 - OK
+    *   {
+    *       "success": false,
+    *       "message": "Code driver no found!"
+    *   }
+*/
+
+
+
+
+
+
+
+
+
 
 /**
     * @api {post} /user/add Register
@@ -141,18 +302,6 @@
 */
 
 /**
-    * @api {get} /countries Obtain countries
-    * @apiName Obtain countries
-    * @apiGroup Country
-*/
-
-/**
-    * @api {get} /car_marks Obtain Car Marks
-    * @apiName Obtain Car Marks
-    * @apiGroup Car
-*/
-
-/**
     * @api {post} /ride/add Create Ride Passenger
     * @apiName Create Ride Passenger
     * @apiGroup Ride
@@ -175,18 +324,6 @@
     *
     * @apiParam {String} id_user User Id.
     * @apiParam {String} id_profile Profile Id.
-*/
-
-/**
-    * @api {post} /car/add/{id} Save Car Info Driver
-    * @apiName Save Car Info Driver
-    * @apiGroup Car
-    *
-    * @apiParam {String} number Car number.
-    * @apiParam {String} year Year.
-    * @apiParam {String} make Make.
-    * @apiParam {String} model Car model.
-    * @apiParam {String} color Car color.
 */
 
 /**
@@ -385,38 +522,12 @@
 */
 
 /**
-    * @api {post} /refer_driver Add Reder Driver
-    * @apiName Add Reder Driver
-    * @apiGroup Driver
-    * 
-    * @apiParam {String} id_driver Driver Id.
-    * @apiParam {String} plate Driver Plate.
-*/
-
-/**
     * @api {post} /favorite/delete Delete Favorite Driver
     * @apiName Delete Favorite Driver
     * @apiGroup Favorite
     * 
     * @apiParam {String} id_passenger Passenger Id.
     * @apiParam {String} id_driver Driver Id.
-*/
-
-/**
-    * @api {post} /delivery/add Add Delivery Passenger
-    * @apiName Add Delivery Passenger
-    * @apiGroup Delivery
-    * 
-    * @apiParam {String} id_user User Id.
-    * @apiParam {String} package_details Package Details.
-    * @apiParam {String} location_start Location Start.
-    * @apiParam {String} location_end Location End.
-    * @apiParam {String} latitude_start Latitude Start.
-    * @apiParam {String} longitude_start Longitude Start.
-    * @apiParam {String} latitude_end Latitude End.
-    * @apiParam {String} longitude_end Longitude End.
-    * @apiParam {String} price Price.
-    * @apiParam {String} accept_counteroffer Accept Counteroffer.
 */
 
 /**

@@ -17,13 +17,9 @@ async function getAll() {
 
 async function selectByState(stateId) {
     try {
-        const query = await City.find({ where: { id_state: stateId } });
+        const query = await City.findAll({ where: { id_state: stateId } });
 
-        if (query != null && query.dataValues != null) {
-            return query.dataValues;
-        } else {
-            return null;
-        }
+        return query;
 
     } catch (e) {
         console.log(e);
@@ -32,13 +28,9 @@ async function selectByState(stateId) {
 
 async function selectByCountry(countryId) {
     try {
-        const query = await City.find({ where: { id_country: countryId } });
+        const query = await City.findAll({ where: { id_country: countryId } });
 
-        if (query != null && query.dataValues != null) {
-            return query.dataValues;
-        } else {
-            return null;
-        }
+        return query;
 
     } catch (e) {
         console.log(e);

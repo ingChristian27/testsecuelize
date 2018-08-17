@@ -4,11 +4,14 @@ async function getAll() {
     try {
         const query = await CarMark.findAll();
 
-        if (query != null && query.dataValues != null) {
-            return query.dataValues;
-        } else {
-            return null;
-        }
+        /*
+        query.forEach(function (element) {
+            console.log("ELEMENT")
+            console.log(element.dataValues);
+        });
+        */
+
+        return query;
 
     } catch (e) {
         console.log(e);

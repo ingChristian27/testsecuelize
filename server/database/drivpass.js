@@ -138,13 +138,13 @@ async function update(data, id_delivery) {
 async function drivpass_user_type(id_user, id_profile) {
   try {
     const query = await DrivpassUserType.find({ where: { id_drivpass: id_user, user_type: id_profile } });
-
+    
     if (query != null && query.dataValues != null) {
       return query.dataValues;
     } else {
       return null;
     }
-  } catch (e) { }
+  } catch (e) { console.log(e)}
 }
 
 async function drivpass_user_type_addProfile(data) {

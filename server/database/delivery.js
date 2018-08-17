@@ -77,7 +77,6 @@ async function selectByPassenger(user_id) {
 }
 
 async function insert(data) {
-  // # TODO: DEBE RETORNAR EL ID
   try {
     const query = await Delivery.create(data);
     if (query != null && query.dataValues != null) {

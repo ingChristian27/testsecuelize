@@ -20,7 +20,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: true
       },
-      password: {
+      description: {
         type: Sequelize.STRING,
         allowNull: true
       },
@@ -28,8 +28,12 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: true
       },
+      time_send: {
+        type: Sequelize.DATE,
+        allowNull: false,
+      },
       rating: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.DOUBLE,
         allowNull: false
       },
       createdAt: {

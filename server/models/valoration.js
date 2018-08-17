@@ -21,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: true
       },
-      password: {
+      description: {
         type: DataTypes.STRING,
         allowNull: true
       },
@@ -30,14 +30,18 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: true,
         validate: { min: 1, max: 2 }
       },
+      time_send: {
+        type: DataTypes.DATE,
+        allowNull: false,
+      },
       rating: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.DOUBLE,
         allowNull: false
       }
     },
     {}
   );
-  valoration.associate = function(models) {
+  valoration.associate = function (models) {
     // associations can be defined here
     //valoration.belongsTo(models.drivpass); // Will add drivpassId to valoration
     //valoration.belongsTo(models.drivpass); // Will add drivpassId to valoration

@@ -1,14 +1,10 @@
-const Countries = require("../models").countries;
+const Countries = require("../models").country;
 
 async function getAll() {
     try {
-        const query = await Countries.find();
+        const query = await Countries.findAll();
 
-        if (query != null && query.dataValues != null) {
-            return query.dataValues;
-        } else {
-            return null;
-        }
+        return query;
 
     } catch (e) {
         console.log(e);

@@ -2,13 +2,9 @@ const State = require("../models").state;
 
 async function getAll() {
     try {
-        const query = await State.find();
+        const query = await State.findAll();
 
-        if (query != null && query.dataValues != null) {
-            return query.dataValues;
-        } else {
-            return null;
-        }
+        return query;
 
     } catch (e) {
         console.log(e);
@@ -17,13 +13,9 @@ async function getAll() {
 
 async function selectByCountry(countryId) {
     try {
-        const query = await State.find({ where: { id_country: countryId } });
+        const query = await State.findAll({ where: { id_country: countryId } });
 
-        if (query != null && query.dataValues != null) {
-            return query.dataValues;
-        } else {
-            return null;
-        }
+        return query;
 
     } catch (e) {
         console.log(e);

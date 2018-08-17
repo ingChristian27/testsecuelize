@@ -9,22 +9,32 @@ router
     .get("/", async (req, res) => {
         try {
             const countries = await Database.getAll();
+
             var to_send = [];
             if (countries == null) return res.status(404).json([]);
-            for (var i in countries.rows) {
-                const id = countries.id;
+
+            for (const country of countries) {
+                const id = country.dataValues.id;
                 const states = await DatabaseState.selectByCountry(id);
-                if (states.length > 0) {
+
+                if (states != null) {               
+                    /*
                     for (var j in states) {
-                        const id_state = states[j].id;
+                       console.log("THIS STATE",states[j].dataValues)
+                    }
+                    */
+                    for (const state of states) {
+                        const id_state = state.dataValues.id;
                         const cities = await DatabaseCity.selectByState(id_state);
-                        to_send.push({ country: countries[i], description: { state: states[i], cities: cities } });
+                        to_send.push({ country: country, description: { state: state, cities: cities } });
                     }
                 } else {
                     const cities = await DatabaseCity.selectByCountry(id);
-                    to_send.push({ country: countries[i], cities: cities });
+                    to_send.push({ country: country, cities: cities });
                 }
+
             }
+
             return res.status(200).json(to_send);
 
         } catch (e) {

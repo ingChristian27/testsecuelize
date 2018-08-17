@@ -132,6 +132,15 @@ define({ "api": [
         }
       ]
     },
+    "error": {
+      "examples": [
+        {
+          "title": "No-Data-Response:",
+          "content": "  HTTP/1.1 200 - OK\n{\n  \"success\": false,\n  \"message\": \"Car user doesn´t exist!\"\n}",
+          "type": "json"
+        }
+      ]
+    },
     "version": "0.0.0",
     "filename": "server/apidoc.js",
     "groupTitle": "Car"
@@ -142,6 +151,24 @@ define({ "api": [
     "title": "Obtain Car Marks",
     "name": "Obtain_Car_Marks",
     "group": "Car",
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 - OK\n      [\n      {\n          \"id\": 3,\n          \"name\": \"Chevrolet\",\n          \"createdAt\": \"2018-01-01T00:00:00.000Z\",\n          \"updatedAt\": \"2018-01-01T00:00:00.000Z\"\n      },\n      {\n          \"id\": 4,\n          \"name\": \"Mazda\",\n          \"createdAt\": \"2018-01-01T00:00:00.000Z\",\n          \"updatedAt\": \"2018-01-01T00:00:00.000Z\"\n      },\n      {\n          \"id\": 5,\n          \"name\": \"Honda\",\n          \"createdAt\": \"2018-01-01T00:00:00.000Z\",\n          \"updatedAt\": \"2018-01-01T00:00:00.000Z\"\n      },\n      {\n          \"id\": 6,\n          \"name\": \"Hyundai\",\n          \"createdAt\": \"2018-01-01T00:00:00.000Z\",\n          \"updatedAt\": \"2018-01-01T00:00:00.000Z\"\n      },\n      {\n          \"id\": 7,\n          \"name\": \"Nissan\",\n          \"createdAt\": \"2018-01-01T00:00:00.000Z\",\n          \"updatedAt\": \"2018-01-01T00:00:00.000Z\"\n      }\n      ]",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "No-Data-Response:",
+          "content": "HTTP/1.1 401 - Unauthorized\n{\n    \"message\": \"I don`t have car marks\"\n}",
+          "type": "json"
+        }
+      ]
+    },
     "version": "0.0.0",
     "filename": "server/apidoc.js",
     "groupTitle": "Car"
@@ -160,14 +187,14 @@ define({ "api": [
             "type": "String",
             "optional": false,
             "field": "number",
-            "description": "<p>Car number.</p>"
+            "description": "<p>Car Plate.</p>"
           },
           {
             "group": "Parameter",
             "type": "String",
             "optional": false,
             "field": "year",
-            "description": "<p>Year.</p>"
+            "description": "<p>Car Year.</p>"
           },
           {
             "group": "Parameter",
@@ -191,7 +218,42 @@ define({ "api": [
             "description": "<p>Car color.</p>"
           }
         ]
-      }
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\"number\": \"MUM92\",\"year\": \"2018\",\"make\": \"String\",\"model\": \"String\",\"color\": \"String\"}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 - OK\n{\n    \"success\": true,\n    \"insertId\": 21\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "User-Not-Found:",
+          "content": "HTTP/1.1 404 - Not Found\n{\n    \"details\": \"user not found\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "User-Has-Car:",
+          "content": "HTTP/1.1 202 - Accepted\n{\n    \"details\": \"This user already have a car\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Plate-Exists:",
+          "content": "HTTP/1.1 203 - Non-Authoritative Information\n{\n    \"details\": \"The plate already exists\"\n}",
+          "type": "json"
+        }
+      ]
     },
     "version": "0.0.0",
     "filename": "server/apidoc.js",
@@ -287,7 +349,14 @@ define({ "api": [
             "description": "<p>Accept Counteroffer.</p>"
           }
         ]
-      }
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n  \"id_user\": 123,\n  \"package_details\": \"String\",\n  \"location_start\": \"String\",\n  \"location_end\": \"String\",\n  \"latitude_start\": 1,\n  \"latitude_end\": 1,\n  \"price\": 300,\n  \"accept_counteroffer\": \"String\"\n}",
+          "type": "json"
+        }
+      ]
     },
     "version": "0.0.0",
     "filename": "server/apidoc.js",
@@ -666,8 +735,8 @@ define({ "api": [
   },
   {
     "type": "get",
-    "url": "/client_token_id/{id}",
-    "title": "Get Token Payment ID",
+    "url": "/client_token",
+    "title": "Get Token Payment",
     "name": "Get_Token_Payment",
     "group": "Payment",
     "version": "0.0.0",
@@ -676,8 +745,8 @@ define({ "api": [
   },
   {
     "type": "get",
-    "url": "/client_token",
-    "title": "Get Token Payment",
+    "url": "/client_token_id/{id}",
+    "title": "Get Token Payment ID",
     "name": "Get_Token_Payment",
     "group": "Payment",
     "version": "0.0.0",
