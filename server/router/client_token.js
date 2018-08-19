@@ -1,34 +1,11 @@
 const express = require("express");
 const router = express.Router();
+const clientToken = require("../controllers/client_token");
 
 router
 
-    .get("/", async (req, res) => {
-        try {
+  .get("/", clientToken.get)
 
-            return res.status(200).json({ clientToken: "TOKEN123" });
-
-        } catch (e) {
-            console.log(e);
-            return res.status(500).send({
-                message: "{'error':'Error inesperado. '}"
-            });
-        }
-    })
-
-    .get("/:id", async (req, res) => {
-        try {
-
-            return res.status(200).json({ clientToken: "TOKEN123-" + request.body.id });
-
-        } catch (e) {
-            console.log(e);
-            return res.status(500).send({
-                message: "{'error':'Error inesperado. '}"
-            });
-        }
-    })
-
-
+  .get("/:id", clientToken.getId);
 
 module.exports = router;

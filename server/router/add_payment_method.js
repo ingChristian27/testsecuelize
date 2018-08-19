@@ -1,20 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const Database = require("../database/countries");
+const payment = require("../controllers/add_payment_method");
 
-router
-
-    .post("/", async (req, res) => {
-        try {
-            return res.status(200).json({ success: "PAYMENT METHOD" })
-
-        } catch (e) {
-            console.log(e);
-            return res.status(500).send({
-                message: "{'error':'Error inesperado. '}"
-            });
-        }
-    })
-
+router.post("/", payment.payment);
 
 module.exports = router;

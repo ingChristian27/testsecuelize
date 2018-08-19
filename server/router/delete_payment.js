@@ -1,20 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const Database = require("../database/countries");
+const deletePayment = require("../controllers/delete_payment");
 
-router
-
-    .post("/", async (req, res) => {
-        try {
-            return res.status(200).json({success:"DELET PAYMENT"})
-
-        } catch (e) {
-            console.log(e);
-            return res.status(500).send({
-                message: "{'error':'Error inesperado. '}"
-            });
-        }
-    })
-
+router.post("/", deletePayment.post);
 
 module.exports = router;
