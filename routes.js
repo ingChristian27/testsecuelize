@@ -44,11 +44,10 @@ module.exports = function(app) {
   app.use("/countries", Country);
   app.use("/car", carRouter);
   app.use("/drivpass", drivpass);
-  app.get("/apidoc", function(req, res) {
-    res.sendFile("/apidoc/index.html");
-  });
   app.get("/", async (req, res, next) => {
     res.json({ message: "Servidor de test..." });
   });
-  app.use("/apidoc", express.static("apidoc"));
+  app.get("/apidoc", function(req, res) {
+    res.sendFile("/apidoc/index.html");
+  });
 };
