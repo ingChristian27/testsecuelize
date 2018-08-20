@@ -1,4 +1,6 @@
 "use strict";
+const bcrypt = require("bcrypt");
+
 module.exports = (sequelize, DataTypes) => {
   var user = sequelize.define(
     "user",
@@ -30,7 +32,16 @@ module.exports = (sequelize, DataTypes) => {
         validate: { min: 0, max: 1 }
       }
     },
-    {}
+    {
+      instanceMethods: {
+        generateHash(password) {
+          return bcrypt.hash(password, bcrypt.genSaltSync(8));
+        },
+        validPassword(password) {
+          return bcrypt.compare(password, this.password);
+        }
+      }
+    }
   );
   user.associate = function(models) {
     // associations can be defined here
