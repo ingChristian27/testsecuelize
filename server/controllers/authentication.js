@@ -1,8 +1,12 @@
 var jwt = require("jwt-simple");
 var cfg = require("../config/passport");
 const Database = require("../database/drivpass");
+
 const EmailCtrl = require("./mailCtrl");
 const uuidv1 = require("uuid/v1");
+
+const bcrypt = require("bcrypt-nodejs");
+
 async function authentication(req, res) {
   try {
     console.log("login/");
@@ -10,30 +14,36 @@ async function authentication(req, res) {
 
     const { email, password } = req.body;
 
-    if (!email || !password)
+    if (!email || !password) {
       return res
         .status(400)
         .send({ message: "email and password are required" });
+    }
 
     const user = await Database.selectByEmail(email);
     console.log(user);
-    if (!user || user.length == 0)
+    if (!user || user.length == 0) {
       return res.status(403).json({ message: "User doesn´t exist!" });
+    }
 
-    const passw = await Database.selectByEmailAndPassword(email, password);
-    if (!passw || passw.length == 0)
+    const EncPassword = bcrypt.hashSync(password, bcrypt.genSaltSync(8));
+
+    //const passw = await Database.selectByEmailAndPassword(email, password);
+    const passw = await Database.selectByEmailAndPassword(email, EncPassword);
+    if (!passw || passw.length == 0) {
       return res.status(404).json({ message: "Incorrect password!" });
+    }
 
-    const id = user.id;
-    const status_profile = user.status_profile;
-    const access_token = "TEST123";
     var payload = {
       email: email
     };
-    var token = jwt.encode(payload, cfg.jwtSecret);
+
+    const id = user.id;
+    const status_profile = user.status_profile;
     //const token = jwt.sign(payload, cfg.jwtSecret, { expiresIn });
+    const access_token = jwt.encode(payload, cfg.jwtSecret);
+
     return res.json({
-      token: token,
       access_token,
       user_id: id,
       status_profile: status_profile
