@@ -1,3 +1,5 @@
+var jwt = require("jwt-simple");
+var cfg = require("../config/passport");
 const Database = require("../database/drivpass");
 
 async function authentication(req, res) {
@@ -24,8 +26,13 @@ async function authentication(req, res) {
     const id = user.id;
     const status_profile = user.status_profile;
     const access_token = "TEST123";
-
+    var payload = {
+      email: email
+    };
+    var token = jwt.encode(payload, cfg.jwtSecret);
+    //const token = jwt.sign(payload, cfg.jwtSecret, { expiresIn });
     return res.json({
+      token: token,
       access_token,
       user_id: id,
       status_profile: status_profile

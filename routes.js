@@ -21,6 +21,7 @@ const carRouter = require("./server/router/car");
 const drivpass = require("./server/router/drivpass");
 
 module.exports = function(app) {
+  app.use("/login", authentication);
   app.use("/user", drivpass);
   app.use("/me", drivpass);
   app.use("/types", driverTypeAssign);

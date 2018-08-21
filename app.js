@@ -1,10 +1,10 @@
 var express = require("express");
 var app = express();
 var bodyParser = require("body-parser");
-var jwt = require("jwt-simple");
+//var jwt = require("jwt-simple");
 var auth = require("./server/config/auth.js")();
 var users = require("./server/config/users");
-var cfg = require("./server/config/passport");
+//var cfg = require("./server/config/passport");
 
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
