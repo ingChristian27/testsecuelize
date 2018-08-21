@@ -3,21 +3,31 @@ const DatabaseRide = require("../database/ride");
 const DatabaseDelivery = require("../database/delivery");
 const DatabaseLocation = require("../database/location");
 
+var jwt = require("jwt-simple");
+var cfg = require("../config/passport");
+const bcrypt = require("bcrypt-nodejs");
+
 async function add(req, res) {
   try {
     const params = req.body;
     params.status_profile = 1;
+    params.password = bcrypt.hashSync(password, bcrypt.genSaltSync(8));
 
     const drivpass = await Database.selectByEmail(params.email);
     console.log(drivpass);
-    if (drivpass != null)
+    if (drivpass != null) {
       return res
         .status(203)
         .json({ message: "This email is already registered" });
+    }
 
     const post = await Database.insert(params);
 
-    const access_token = "TEST123";
+    var payload = {
+      email: post.email
+    };
+    const access_token = jwt.encode(payload, cfg.jwtSecret);
+
     return res.status(200).json({
       success: true,
       message: "User created!",
@@ -30,6 +40,7 @@ async function add(req, res) {
       .json({ message: " ha ocurrido un error inesperado", err: e });
   }
 }
+
 async function profile(req, res) {
   try {
     const { id_user, id_profile } = req.body;
