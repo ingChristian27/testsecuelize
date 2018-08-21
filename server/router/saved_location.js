@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const saved = require("../controllers/saved_location");
+var auth = require("../config/auth.js")();
 
 router
 

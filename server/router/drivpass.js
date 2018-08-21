@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const drivpass = require("../controllers/drivpass");
+var auth = require("../config/auth.js")();
+
 router
 
   .post("/add", auth.authenticate(), drivpass.add)

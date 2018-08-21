@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 const ride = require("../controllers/ride");
 
+var auth = require("../config/auth.js")();
+
 router
 
   .post("/add", auth.authenticate(), ride.add)

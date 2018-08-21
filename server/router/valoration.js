@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const valorations = require("../controllers/valoration");
+var auth = require("../config/auth.js")();
 
 router
 
