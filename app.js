@@ -10,7 +10,7 @@ app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 app.use(auth.initialize());
-
+app.use("/apidoc", express.static("apidoc"));
 require("./routes")(app);
 
 app.post("/token", function(req, res) {
@@ -42,7 +42,6 @@ app.get("/user", auth.authenticate(), function(req, res) {
   res.json({ message: "Por fin paso esa berga!!" });
 });
 
-app.use("/apidoc", express.static("apidoc"));
 const port = parseInt(process.env.PORT, 10) || 8000;
 app.listen(port, function() {
   console.log("Server Express Ready!");
