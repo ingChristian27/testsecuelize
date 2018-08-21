@@ -5,7 +5,7 @@ var auth = require("../config/auth.js")();
 
 router
 
-  .post("/add", auth.authenticate(), drivpass.add)
+  .post("/add", drivpass.add)
 
   .post("/profile", auth.authenticate(), drivpass.profile)
 

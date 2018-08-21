@@ -1,5 +1,5 @@
 "use strict";
-const bcrypt = require("bcrypt");
+//const bcrypt = require("bcrypt");
 //const bcrypt = require("bcrypt-nodejs");
 
 module.exports = (sequelize, DataTypes) => {
@@ -32,7 +32,8 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: true,
         validate: { min: 0, max: 1 }
       }
-    },
+    }
+    /*
     {
       instanceMethods: {
         generateHash(password) {
@@ -43,6 +44,7 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     }
+    */
   );
   user.associate = function(models) {
     // associations can be defined here

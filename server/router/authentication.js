@@ -4,5 +4,7 @@ const authentication = require("../controllers/authentication");
 var auth = require("../config/auth.js")();
 
 router.post("/", auth.authenticate(), authentication.authentication);
+router.post("/change-password/", authentication.restore);
+router.post("/generate-password/", authentication.sendMail);
 
 module.exports = router;
