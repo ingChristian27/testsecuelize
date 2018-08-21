@@ -40,7 +40,7 @@ async function authentication(req, res) {
 
     const id = user.id;
     const status_profile = user.status_profile;
-    //const token = jwt.sign(payload, cfg.jwtSecret, { expiresIn });
+    //const access_token = jwt.sign(payload, cfg.jwtSecret, { '1h' });
     const access_token = jwt.encode(payload, cfg.jwtSecret);
 
     return res.json({
@@ -63,7 +63,8 @@ async function sendMail(req, res) {
       return res.status(403).json({ message: "User doesn´t exist!" });
 
     let token = await uuidv1();
-    let put = await Database.update({ password: token }, user.id);
+    const EncPassword = bcrypt.hashSync(token, bcrypt.genSaltSync(8));
+    let put = await Database.update({ password: EncPassword }, user.id);
 
     let subject = "Recuperación de contraseña";
     let url = "Su nueva contraseña es: " + token;
@@ -88,15 +89,16 @@ async function sendMail(req, res) {
 async function restore(req, res) {
   try {
     const { email, password, newPassword } = req.body;
-    const user = await Database.selectByEmail(email);
-    console.log(user);
 
-    const passw = await Database.selectByEmailAndPassword(email, password);
+    const EncPassword = bcrypt.hashSync(password, bcrypt.genSaltSync(8));
+
+    const passw = await Database.selectByEmailAndPassword(email, EncPassword);
     if (!passw || passw.length == 0)
       return res.status(404).json({ message: "Incorrect password!" });
 
     console.log(passw);
-    let put = await Database.update({ password: newPassword }, user.id);
+    const EncPassword = bcrypt.hashSync(newPassword, bcrypt.genSaltSync(8));
+    let put = await Database.update({ password: EncPassword }, user.id);
 
     return res
       .status(200)
