@@ -6,10 +6,10 @@ router
 
   .get("/", auth.authenticate(), car.get)
 
-  .post("/", car.post)
+  .post("/", auth.authenticate(), car.post)
 
-  .post("/add/:id", car.postParams)
+  .post("/add/:id", auth.authenticate(), car.postParams)
 
-  .get("/info/:id", car.getId);
+  .get("/info/:id", auth.authenticate(), car.getId);
 
 module.exports = router;

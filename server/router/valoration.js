@@ -4,8 +4,8 @@ const valorations = require("../controllers/valoration");
 
 router
 
-  .post("/add", valorations.add)
+  .post("/add", auth.authenticate(), valorations.add)
 
-  .get("/:id/:type", valorations.get);
+  .get("/:id/:type", auth.authenticate(), valorations.get);
 
 module.exports = router;

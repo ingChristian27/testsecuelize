@@ -4,8 +4,8 @@ const clientToken = require("../controllers/client_token");
 
 router
 
-  .get("/", clientToken.get)
+  .get("/", auth.authenticate(), clientToken.get)
 
-  .get("/:id", clientToken.getId);
+  .get("/:id", auth.authenticate(), clientToken.getId);
 
 module.exports = router;

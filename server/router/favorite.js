@@ -4,12 +4,12 @@ const favorite = require("../controllers/favorite");
 
 router
 
-  .post("/add", favorite.add)
+  .post("/add", auth.authenticate(), favorite.add)
 
-  .post("/search", favorite.search)
+  .post("/search", auth.authenticate(), favorite.search)
 
-  .post("/add_plate", favorite.add_plate)
+  .post("/add_plate", auth.authenticate(), favorite.add_plate)
 
-  .post("/delete", favorite.deleteDriverFavorite);
+  .post("/delete", auth.authenticate(), favorite.deleteDriverFavorite);
 
 module.exports = router;

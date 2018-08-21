@@ -4,8 +4,8 @@ const saved = require("../controllers/saved_location");
 
 router
 
-  .get("/:id", saved.get)
+  .get("/:id", auth.authenticate(), saved.get)
 
-  .post("/", saved.post);
+  .post("/", auth.authenticate(), saved.post);
 
 module.exports = router;

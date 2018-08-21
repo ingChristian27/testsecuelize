@@ -4,14 +4,14 @@ const ride = require("../controllers/ride");
 
 router
 
-  .post("/add", ride.add)
+  .post("/add", auth.authenticate(), ride.add)
 
-  .put("/counteroffer/:id", ride.counteroffer)
+  .put("/counteroffer/:id", auth.authenticate(), ride.counteroffer)
 
-  .put("/edit/:id", ride.edit)
+  .put("/edit/:id", auth.authenticate(), ride.edit)
 
-  .get("/history/:id", ride.history)
+  .get("/history/:id", auth.authenticate(), ride.history)
 
-  .get("/history_favorite/:id", ride.history_favorite);
+  .get("/history_favorite/:id", auth.authenticate(), ride.history_favorite);
 
 module.exports = router;
