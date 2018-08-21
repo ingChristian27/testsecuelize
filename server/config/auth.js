@@ -12,6 +12,7 @@ var params = {
 
 module.exports = function() {
   var strategy = new Strategy(params, function(payload, done) {
+    console.log("Por fin entro al token....");
     var user = users[payload.id] || null;
     if (user) {
       return done(null, {
