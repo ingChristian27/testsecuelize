@@ -4,6 +4,10 @@ var bodyParser = require("body-parser");
 var auth = require("./server/config/auth.js")();
 
 var morgan = require('morgan')
+var fs = require('fs')
+var path = require('path')
+
+var accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' })
 
 app.use(morgan(function (tokens, req, res) {
 
@@ -26,7 +30,7 @@ app.use(morgan(function (tokens, req, res) {
     return value;
   });
   cache = [];
-  reqHeadersJson = "{'headers':"+reqHeadersJson+","
+  reqHeadersJson = "{'headers':" + reqHeadersJson + ","
 
 
   var reqParamsJson = JSON.stringify(req.params, function (key, value) {
@@ -47,7 +51,7 @@ app.use(morgan(function (tokens, req, res) {
     return value;
   });
   cache = [];
-  reqParamsJson = "'params':"+reqParamsJson+","
+  reqParamsJson = "'params':" + reqParamsJson + ","
 
   var reqBodyJson = JSON.stringify(req.body, function (key, value) {
     if (typeof value === 'object' && value !== null) {
@@ -67,8 +71,8 @@ app.use(morgan(function (tokens, req, res) {
     return value;
   });
   cache = null; // Enable garbage collection
-  reqBodyJson = "'body':"+reqBodyJson+"}"
-  
+  reqBodyJson = "'body':" + reqBodyJson + "}"
+
 
   return [
     tokens.method(req, res),
@@ -79,7 +83,11 @@ app.use(morgan(function (tokens, req, res) {
     reqParamsJson,
     reqBodyJson
   ].join(' ')
-}))
+}, { stream: accessLogStream }))
+
+
+
+
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
