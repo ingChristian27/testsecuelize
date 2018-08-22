@@ -11,7 +11,10 @@ async function add(req, res) {
   try {
     const params = req.body;
     params.status_profile = 1;
-    params.password = bcrypt.hashSync(password, bcrypt.genSaltSync(8));
+
+    params.password = bcrypt.hashSync(params.password, bcrypt.genSaltSync(8));
+
+    console.log(params.password)
 
     const drivpass = await Database.selectByEmail(params.email);
     console.log(drivpass);
@@ -35,6 +38,7 @@ async function add(req, res) {
       access_token
     });
   } catch (e) {
+    console.log(e)
     res
       .status(500)
       .json({ message: " ha ocurrido un error inesperado", err: e });

@@ -13,7 +13,7 @@ async function get(req, res) {
       const id = country.dataValues.id;
       const states = await DatabaseState.selectByCountry(id);
 
-      if (states != null) {
+      if (states != null && states.length >0) {
         /*
                 for (var j in states) {
                    console.log("THIS STATE",states[j].dataValues)

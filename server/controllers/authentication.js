@@ -26,13 +26,19 @@ async function authentication(req, res) {
       return res.status(403).json({ message: "User doesn´t exist!" });
     }
 
-    const EncPassword = bcrypt.hashSync(password, bcrypt.genSaltSync(8));
+    //const EncPassword = bcrypt.hashSync(password);
+
+    if (!bcrypt.compareSync(password, user.password)) {
+      return res.status(404).json({ message: "Incorrect password!" });
+    }
 
     //const passw = await Database.selectByEmailAndPassword(email, password);
+    /*
     const passw = await Database.selectByEmailAndPassword(email, EncPassword);
     if (!passw || passw.length == 0) {
       return res.status(404).json({ message: "Incorrect password!" });
     }
+    */
 
     var payload = {
       email: email
@@ -50,9 +56,15 @@ async function authentication(req, res) {
     });
   } catch (e) {
     console.log(e);
-    return res.status(500).send({
-      message: "{'error':'Error inesperado. '}"
-    });
+    if (e === "Not a valid BCrypt hash.") {
+      return res.status(500).send({
+        message: "error: La clave no se ha guardado con un cifrado valido."
+      });
+    } else {
+      return res.status(500).send({
+        message: "{'error':'Error inesperado. '}"
+      });
+    }
   }
 }
 async function sendMail(req, res) {
@@ -83,27 +95,42 @@ async function sendMail(req, res) {
     return res
       .status(404)
       .json({ message: "la contraseña se ha actuaizado con éxito" });
-  } catch (e) {}
+  } catch (e) { }
 }
 
 async function restore(req, res) {
   try {
     const { email, password, newPassword } = req.body;
 
-    const EncPassword = bcrypt.hashSync(password, bcrypt.genSaltSync(8));
+    const user = await Database.selectByEmail(email);
+    console.log(user);
+    if (!user || user.length == 0) {
+      return res.status(403).json({ message: "User doesn´t exist!" });
+    }
 
-    const passw = await Database.selectByEmailAndPassword(email, EncPassword);
-    if (!passw || passw.length == 0)
+    //const EncPassword = bcrypt.hashSync(password);
+
+    if (!bcrypt.compareSync(password, user.password)) {
       return res.status(404).json({ message: "Incorrect password!" });
+    }
 
-    console.log(passw);
+    //const passw = await Database.selectByEmailAndPassword(email, password);
+    /*
+    const passw = await Database.selectByEmailAndPassword(email, EncPassword);
+    if (!passw || passw.length == 0) {
+      return res.status(404).json({ message: "Incorrect password!" });
+    }
+    */
+    console.log(newPassword);
+
     const EncPassword = bcrypt.hashSync(newPassword, bcrypt.genSaltSync(8));
-    let put = await Database.update({ password: EncPassword }, user.id);
+    user.password = EncPassword;
+    let put = await Database.update(user, user.id);
 
     return res
       .status(200)
       .json({ message: "la contraseña se ha actuaizado con éxito" });
-  } catch (e) {}
+  } catch (e) { }
 }
 
 exports.authentication = authentication;

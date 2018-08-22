@@ -192,7 +192,7 @@
 */
 
 /**
-    * @api {post} /refer_driver Add Reder Driver
+    * @api {post} /refer_driver Add Refer Driver
     * @apiName Add Reder Driver
     * @apiGroup Driver
     * 
@@ -211,6 +211,42 @@
     *   {
     *       "success": false,
     *       "message": "Code driver no found!"
+    *   }
+*/
+
+/**
+    * @api {post} /types/add/{id} Save Type Driver
+    * @apiName Save Type Driver
+    * @apiGroup Driver
+    *
+    * @apiParam {List} driver_type Drivers type.
+    * 
+    * @apiParamExample {json} Request-Example:
+    * [
+    *   {"driver_type": 1},{"driver_type": 2},{"driver_type": 3},{"driver_type": 4}
+    * ]
+    * 
+    * @apiSuccessExample Success-Response:
+    *   HTTP/1.1 200 - OK
+    *   {"success": true,"message": "Driver types created!"}
+    * 
+    * @apiError UserNotFound User not found. Response body data may not be shown because of 204 return status set
+    
+*/
+
+/**
+    * @api {post} /favorite/add_plate Add Favorite Driver Plate
+    * @apiName Add Favorite Driver Plate
+    * @apiGroup Favorite
+    * 
+    * @apiParam {String} plate Driver Plate.
+    * @apiParam {String} id_passenger Passenger Id.
+    * 
+    * @apiErrorExample Plate-Not-Found:
+    *   HTTP/1.1 200 - OK
+    *   {
+    *       "success": false,
+    *       "message": "Car do not exist"
     *   }
 */
 
@@ -272,14 +308,6 @@
     * @api {get} /me/{userType} Obtain type User
     * @apiName Obtain type User
     * @apiGroup User
-*/
-
-/**
-    * @api {post} /types/add/{id} Save Type Driver
-    * @apiName Save Type Driver
-    * @apiGroup Driver
-    *
-    * @apiParam {List} driver_type Drivers type.
 */
 
 /**
@@ -510,15 +538,6 @@
     * 
     * @apiParam {String} id_passenger Passenger Id.
     * @apiParam {String} id_driver Driver Id.
-*/
-
-/**
-    * @api {post} /favorite/add_plate Add Favorite Driver Plate
-    * @apiName Add Favorite Driver Plate
-    * @apiGroup Favorite
-    * 
-    * @apiParam {String} plate Driver Plate.
-    * @apiParam {String} id_passenger Passenger Id.
 */
 
 /**

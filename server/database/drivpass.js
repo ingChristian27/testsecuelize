@@ -120,6 +120,7 @@ async function selectByPassenger(user_id) {
   }
 }
 async function update(data, id_delivery) {
+  console.log("UPDATE")
   try {
     const query = await Drivpass.update(data, {
       returning: true,
@@ -130,7 +131,7 @@ async function update(data, id_delivery) {
     } else {
       return null;
     }
-  } catch (e) { }
+  } catch (e) {console.log(e) }
 }
 
 

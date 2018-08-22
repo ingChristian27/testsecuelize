@@ -20,7 +20,7 @@ const Country = require("./server/router/countries");
 const carRouter = require("./server/router/car");
 const drivpass = require("./server/router/drivpass");
 
-module.exports = function(app) {
+module.exports = function (app) {
   app.use("/login", authentication);
   app.use("/user", drivpass);
   app.use("/me", drivpass);
@@ -48,7 +48,7 @@ module.exports = function(app) {
   app.get("/", async (req, res, next) => {
     res.json({ message: "Servidor de test..." });
   });
-  app.get("/apidoc", function(req, res) {
+  app.get("/apidoc", function (req, res) {
     res.sendFile("/apidoc/index.html");
   });
 };
