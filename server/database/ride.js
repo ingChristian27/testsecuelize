@@ -36,7 +36,6 @@ async function all() {
 }
 
 async function selectByUser(id_user, user_type) {
-  console.log("IN HERE+++++++++++", id_user, user_type)
   try {
     let query;
     if (user_type == 1) {
@@ -121,6 +120,32 @@ async function update(data, id_ride) {
 }
 
 
+async function history_rides(id_passenger) {
+
+  return null;
+
+  //TODO ALL JOINS
+  /*
+  const query=`SELECT DISTINCT ride.id, ride.id_driver, drivpass.name, ride.price, car_info.number, drivpass.image, 
+  (SELECT AVG(rating) FROM valorations WHERE drivpass.id = valorations.id_drivpass) as rate,
+  (SELECT id FROM drivpass WHERE favorite_driver.id_driver =  drivpass.id) as favorite_id
+  FROM ride
+  JOIN drivpass ON ride.id_driver = drivpass.id
+  JOIN car_info ON ride.id_driver = car_info.id_user
+  JOIN valorations ON ride.id_driver = valorations.id_drivpass
+  LEFT JOIN favorite_driver ON drivpass.id = favorite_driver.id_driver
+  WHERE ride.id_passenger = ('${id_passenger}')
+  ORDER BY ride.id DESC
+  LIMIT 10`;
+  */
+}
+
+
+
+
+
+
+
 
 
 exports.selectByRide = selectByRide;
@@ -130,6 +155,7 @@ exports.selectByPassenger = selectByPassenger;
 exports.selectById = selectById;
 exports.insert = insert;
 exports.update = update;
+exports.history_rides = history_rides;
 
 
   /*
@@ -182,24 +208,9 @@ exports.update = update;
   },
   */
 
-  /*
-  history_rides: (id_passenger)=>{
-    const query=`SELECT DISTINCT ride.id, ride.id_driver, drivpass.name, ride.price, car_info.number, drivpass.image, 
-    (SELECT AVG(rating) FROM valorations WHERE drivpass.id = valorations.id_drivpass) as rate,
-    (SELECT id FROM drivpass WHERE favorite_driver.id_driver =  drivpass.id) as favorite_id
-    FROM ride
-    JOIN drivpass ON ride.id_driver = drivpass.id
-    JOIN car_info ON ride.id_driver = car_info.id_user
-    JOIN valorations ON ride.id_driver = valorations.id_drivpass
-    LEFT JOIN favorite_driver ON drivpass.id = favorite_driver.id_driver
-    WHERE ride.id_passenger = ('${id_passenger}')
-    ORDER BY ride.id DESC
-    LIMIT 10`;
 
 
-    return query;
-  },
-  */
+
 
   /*
 history_rides_favorite:  (id_passenger)=>{

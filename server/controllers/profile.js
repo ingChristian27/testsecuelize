@@ -1,4 +1,4 @@
-const DatabaseDrivpass = require("../database/countries");
+const DatabaseDrivpass = require("../database/drivpass");
 const DatabaseLocation = require("../database/location");
 
 async function verify(req, res) {

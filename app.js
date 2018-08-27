@@ -7,7 +7,15 @@ var morgan = require('morgan')
 var fs = require('fs')
 var path = require('path')
 
+//var morganBody = require ('morgan-body');
+
 var accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' })
+const moment = require("moment");
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+//morganBody(app);
 
 app.use(morgan(function (tokens, req, res) {
 
@@ -73,8 +81,8 @@ app.use(morgan(function (tokens, req, res) {
   cache = null; // Enable garbage collection
   reqBodyJson = "'body':" + reqBodyJson + "}"
 
-
   return [
+    moment(new Date()),
     tokens.method(req, res),
     tokens.url(req, res),
     tokens.status(req, res),
@@ -89,8 +97,7 @@ app.use(morgan(function (tokens, req, res) {
 
 
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+
 
 app.use(auth.initialize());
 app.use("/apidoc", express.static("apidoc"));

@@ -1,11 +1,21 @@
 const Database = require("../database/ride");
 const DatabaseRideDriver = require("../database/ride_driver");
+const DatabaseDrivpass = require("../database/drivpass");
+const DatabaseCarInfo = require("../database/car_info");
 
 async function add(req, res) {
   try {
     const params = req.body;
     params.id_driver_type = 1;
     const ride = await Database.selectByPassenger(params.id_passenger);
+    if (ride == null) {
+      return res
+      .status(400)
+      .json({
+        success: false,
+        message: "ride not found"
+      });
+    }
     //    if(ride.rows.length > 0)  return res.status(200).json({details: "You already have a ride in progress!"});
     const post = await Database.insert(params);
     const rideResult = await Database.selectById(post.id);
@@ -122,7 +132,34 @@ async function edit(req, res) {
 async function history(req, res) {
   try {
     const id_passenger = req.params.id;
-    const history = await Database.history_rides(id_passenger);
+
+    //TODO HISTORY (TEMPORAL)
+    //----------------------------------------------------------------
+    //const history = await Database.history_rides(id_passenger);
+    var history = null;
+
+    var ride = await Database.selectByPassenger(id_passenger)
+
+    var drivpass = await DatabaseDrivpass.selectById(ride.id_driver);
+
+    var car_info = await DatabaseCarInfo.selectCar(ride.id_driver);
+
+    history = {
+      id:ride.id,
+      id_driver:ride.id_driver,
+      name:drivpass.name,
+      price:ride.price,
+      number:car_info.number,
+      image:drivpass.image, 
+      rate:null,//(SELECT AVG(rating) FROM valorations WHERE drivpass.id = valorations.id_drivpass) as rate,
+      favorite_id:null//(SELECT id FROM drivpasses WHERE favorite_driver.id_driver =  drivpass.id) as favorite_id
+    }
+    //----------------------------------------------------------------
+
+
+
+    
+
     if (history == null)
       return res
         .status(200)

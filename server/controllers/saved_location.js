@@ -13,7 +13,7 @@ async function get(req, res) {
 
     return res
       .status(200)
-      .json({ saved_location: savedLocation.rows, success: true });
+      .json({ saved_location: savedLocation, success: true });
   } catch (e) {
     console.log(e);
     return res.status(500).send({

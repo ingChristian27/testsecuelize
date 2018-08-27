@@ -192,7 +192,9 @@ async function selectHistoryPayment(user_id) {
 async function getSavedLocation(user_id) {
   try {
 
-    const query = await SavedLocation.find({ where: { user_id: user_id } });
+    const query = await SavedLocation.findAll({ where: { user_id: user_id } });
+
+    return query;
 
     /*
       TODO: Campos, order y limit
@@ -203,11 +205,7 @@ async function getSavedLocation(user_id) {
         .field("description")
     */
 
-    if (query != null && query.dataValues != null) {
-      return query.dataValues;
-    } else {
-      return null;
-    }
+
 
   } catch (e) {
     console.log(e);
