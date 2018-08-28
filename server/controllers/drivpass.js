@@ -7,6 +7,8 @@ var jwt = require("jwt-simple");
 var cfg = require("../config/passport");
 const bcrypt = require("bcrypt-nodejs");
 
+var auth = require("../config/auth.js")();
+
 async function add(req, res) {
   try {
     const params = req.body;
@@ -68,13 +70,16 @@ async function profile(req, res) {
 
 async function getId(req, res) {
   try {
+    console.log("IN")
     const user_type = req.params.id; //1 driver, 2 passenger
+    const id_drivpass = auth.getDecodeToken().id;
 
     var acu = 0;
     var val = 0;
     var location = {};
-    const id_drivpass = 1;
+
     const drivpass = await Database.selectById(id_drivpass);
+
     if (drivpass == null) return res.status(200).json({});
     drivpass.auth_sms = 1;
     drivpass.reg_id = 1;
@@ -82,10 +87,7 @@ async function getId(req, res) {
 
     const id_city = drivpass.city;
     const rides = await DatabaseRide.selectByUser(id_drivpass, user_type);
-    const deliveries = await DatabaseDelivery.selectByUser(
-      id_drivpass,
-      user_type
-    );
+    const deliveries = await DatabaseDelivery.selectByUser(id_drivpass,user_type);
     //const valoration = await connection.query(queries_valoration.select(id_drivpass, user_type));
     const valoration = null;
     var actual_location = await DatabaseLocation.selectById(id_drivpass);

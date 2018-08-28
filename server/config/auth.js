@@ -1,7 +1,7 @@
 // auth.js
 var passport = require("passport");
 var passportJWT = require("passport-jwt");
-var users = require("./users.js");
+
 const User = require("../database/drivpass");
 const Database = require("../database/drivpass");
 var cfg = require("./passport.js");
@@ -13,6 +13,8 @@ var params = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken()
 };
 
+var myUser = null;
+
 module.exports = function() {
   var strategy = new Strategy(params, function(payload, done) {
     console.log("Por fin entro al token....");
@@ -20,8 +22,9 @@ module.exports = function() {
     console.log("==============");
 
     Database.selectByEmail(payload.email).then(user => {
-      console.log(user);
+      
       if (user) {
+        myUser = user;
         return done(null, {
           email: user.email
         });
@@ -29,7 +32,8 @@ module.exports = function() {
         return done(new Error("User not found"), null);
       }
     });
-    //var user = users[payload.id] || null;
+
+
   });
 
   passport.use(strategy);
@@ -39,6 +43,8 @@ module.exports = function() {
     },
     authenticate: function() {
       return passport.authenticate("jwt", cfg.jwtSession);
+    },getDecodeToken: function(){
+      return myUser;
     }
   };
 };
