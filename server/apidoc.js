@@ -193,7 +193,7 @@
 
 /**
     * @api {post} /refer_driver Add Refer Driver
-    * @apiName Add Reder Driver
+    * @apiName Add Refer Driver
     * @apiGroup Driver
     * 
     * @apiParam {String} id_driver Driver Id.
