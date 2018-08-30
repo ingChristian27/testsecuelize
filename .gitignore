@@ -1,4 +1,4 @@
 node_modules/
 config/config.json
 access.log
-
+package-lock.json
