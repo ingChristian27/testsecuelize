@@ -1,4 +1,4 @@
 node_modules/
-config/config.json
 access.log
-
+server/config/config.json
+.Comandos.txt
