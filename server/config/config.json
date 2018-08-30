@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "erjmkktl",
-    "password": "eyaSqbPzxiCejkH3SNkPi8ncBMRQGBHQ",
-    "database": "erjmkktl",
-    "host": "baasu.db.elephantsql.com",
+    "username": "postgres",
+    "password": "admin",
+    "database": "buscaride",
+    "host": "localhost",
     "dialect": "postgres"
   },
   "test": {
