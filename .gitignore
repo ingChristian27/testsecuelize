@@ -1,8 +1,4 @@
 node_modules/
 access.log
-<<<<<<< HEAD
 server/config/config.json
 .Comandos.txt
-=======
-package-lock.json
->>>>>>> 22c2a7235fc808ebdad23a18bb3a3fcdebd1f8db

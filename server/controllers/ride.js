@@ -10,15 +10,8 @@ async function add(req, res) {
     const params = req.body;
     params.id_driver_type = 1;
     params.status = 1;
-    const ride = await Database.selectByPassenger(params.id_passenger);
-    if (ride == null) {
-      return res
-      .status(400)
-      .json({
-        success: false,
-        message: "ride not found"
-      });
-    }
+    //const ride = await Database.selectByPassenger(params.id_passenger);
+
     //    if(ride.rows.length > 0)  return res.status(200).json({details: "You already have a ride in progress!"});
     const post = await Database.insert(params);
     console.log('------------------------------------');
