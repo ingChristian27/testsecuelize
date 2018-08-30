@@ -6,7 +6,7 @@ async function payment(req, res) {
   } catch (e) {
     console.log(e);
     return res.status(500).send({
-      message: "{'error':'Error inesperado. '}"
+      message: "{'error':'Error inesperado.'}"
     });
   }
 }
