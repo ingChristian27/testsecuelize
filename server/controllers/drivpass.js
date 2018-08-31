@@ -91,6 +91,7 @@ async function getId(req, res) {
     const rides = await DatabaseRide.selectByUser(id_drivpass, user_type);
     const deliveries = await DatabaseDelivery.selectByUser(id_drivpass, user_type);
     const valoration = await DatabaseValoration.select(id_drivpass, user_type); //TODO JOIN (Original)
+    let valorationsJoin = [];
     //const valoration = null;
     var actual_location = await DatabaseLocation.selectById(id_drivpass);
     if (actual_location == 0) {
@@ -102,8 +103,31 @@ async function getId(req, res) {
       val = 0.0;
     } else {
 
-      for (const thisValoration of valoration) {
-        acu += parseFloat(thisValoration.rating);
+      for (let i in valoration) {
+        acu += parseFloat(valoration[i].rating);
+
+        //BUSCAMOS UIUSARIOS FALTANTES DEL JOIN(NAME, IMAGE)
+        const user = await Database.selectById(valoration[i].id_user);
+        var userName = "";
+        var userImage = "";
+        if(user != null){
+          userName = user.name;
+          userImage = user.image;
+        }
+
+        //SETEAMOS DATOS FALTANTES DEL JOIN TODO QUITAR O CORREGIR CON JOIN
+        valorationsJoin[i] = {
+          "id": valoration[i].id,
+          "id_user": valoration[i].id_user,
+          "id_drivpass": valoration[i].id_drivpass,
+          "commentary": valoration[i].commentary,
+          "description": valoration[i].description,
+          "type": valoration[i].type,
+          "time_send": valoration[i].time_send,
+          "rating": valoration[i].rating,
+          "name": userName,
+          "image": userImage
+        }
       }
       val = acu / valoration.length;
     }
@@ -145,7 +169,7 @@ async function getId(req, res) {
       location: location,
       rides: rides,
       deliveries: deliveries,
-      valorations: valoration,
+      valorations: valorationsJoin,
       current_location: actual_location,
       current_valoration: val,
       total_rides: total_rides,

@@ -17,7 +17,7 @@ async function insert(data) {
 
 async function select(id_drivpass, user_type) {
     try {
-        const query = await Valoration.findAll({ where: { id_drivpass: id_drivpass, type: user_type, id_user:id_drivpass } });
+        const query = await Valoration.findAll({ where: { id_drivpass: id_drivpass, type: user_type } });
 
         return query;
 
