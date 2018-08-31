@@ -16,7 +16,7 @@ async function add(req, res) {
 
     params.password = bcrypt.hashSync(params.password, bcrypt.genSaltSync(8));
 
-    console.log(params.password)
+    console.log(params.password);
 
     const drivpass = await Database.selectByEmail(params.email);
     console.log(drivpass);
@@ -40,7 +40,7 @@ async function add(req, res) {
       access_token
     });
   } catch (e) {
-    console.log(e)
+    console.log(e);
     res
       .status(500)
       .json({ message: " ha ocurrido un error inesperado", err: e });
@@ -70,7 +70,7 @@ async function profile(req, res) {
 
 async function getId(req, res) {
   try {
-    console.log("IN")
+    console.log("IN");
     const user_type = req.params.id; //1 driver, 2 passenger
     const id_drivpass = auth.getDecodeToken().id;
 
@@ -87,7 +87,10 @@ async function getId(req, res) {
 
     const id_city = drivpass.city;
     const rides = await DatabaseRide.selectByUser(id_drivpass, user_type);
-    const deliveries = await DatabaseDelivery.selectByUser(id_drivpass,user_type);
+    const deliveries = await DatabaseDelivery.selectByUser(
+      id_drivpass,
+      user_type
+    );
     //const valoration = await connection.query(queries_valoration.select(id_drivpass, user_type));
     const valoration = null;
     var actual_location = await DatabaseLocation.selectById(id_drivpass);

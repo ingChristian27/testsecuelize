@@ -12,7 +12,6 @@ async function selectByEmail(email) {
     } else {
       return null;
     }
-
   } catch (e) {
     console.log(e);
   }
@@ -20,14 +19,15 @@ async function selectByEmail(email) {
 
 async function selectByEmailAndPassword(email, password) {
   try {
-    const query = await Drivpass.find({ where: { email: email, password: password } });
+    const query = await Drivpass.find({
+      where: { email: email, password: password }
+    });
 
     if (query != null && query.dataValues != null) {
       return query.dataValues;
     } else {
       return null;
     }
-
   } catch (e) {
     console.log(e);
   }
@@ -54,7 +54,6 @@ async function selectById(delivery_id) {
     } else {
       return null;
     }
-
   } catch (e) {
     console.log(e);
   }
@@ -120,7 +119,7 @@ async function selectByPassenger(user_id) {
   }
 }
 async function update(data, id_delivery) {
-  console.log("UPDATE")
+  console.log("UPDATE");
   try {
     const query = await Drivpass.update(data, {
       returning: true,
@@ -131,21 +130,25 @@ async function update(data, id_delivery) {
     } else {
       return null;
     }
-  } catch (e) {console.log(e) }
+  } catch (e) {
+    console.log(e);
+  }
 }
-
-
 
 async function drivpass_user_type(id_user, id_profile) {
   try {
-    const query = await DrivpassUserType.find({ where: { id_drivpass: id_user, user_type: id_profile } });
-    
+    const query = await DrivpassUserType.find({
+      where: { id_drivpass: id_user, user_type: id_profile }
+    });
+
     if (query != null && query.dataValues != null) {
       return query.dataValues;
     } else {
       return null;
     }
-  } catch (e) { console.log(e)}
+  } catch (e) {
+    console.log(e);
+  }
 }
 
 async function drivpass_user_type_addProfile(data) {
@@ -163,7 +166,6 @@ async function drivpass_user_type_addProfile(data) {
 
 async function selectHistoryPayment(user_id) {
   try {
-
     const query = await BuyToken.find({ where: { user_id: user_id } });
 
     /*
@@ -182,16 +184,13 @@ async function selectHistoryPayment(user_id) {
     } else {
       return null;
     }
-
   } catch (e) {
     console.log(e);
   }
 }
 
-
 async function getSavedLocation(user_id) {
   try {
-
     const query = await SavedLocation.findAll({ where: { user_id: user_id } });
 
     return query;
@@ -204,18 +203,13 @@ async function getSavedLocation(user_id) {
         .field("longitud")
         .field("description")
     */
-
-
-
   } catch (e) {
     console.log(e);
   }
 }
 
-
 async function insetSavedLocation(location) {
   try {
-
     const query = await SavedLocation.create(location);
 
     /*
@@ -228,7 +222,6 @@ async function insetSavedLocation(location) {
     } else {
       return null;
     }
-
   } catch (e) {
     console.log(e);
   }

@@ -39,17 +39,13 @@ async function selectByUser(id_user, user_type) {
   try {
     let query;
     if (user_type == 1) {
-      query = await Ride.find({ where: { id_driver: id_user } });
+      //query = await Ride.find({ where: { id_driver: id_user } });
+      const query = await Ride.findAll({ where: { id_driver: id_user } });
     } else {
-      query = await Ride.find({ where: { id_passenger: id_user } });
+      // query = await Ride.find({ where: { id_passenger: id_user } });
+      query = await Ride.findAll({ where: { id_passenger: id_user } });
     }
-
-    if (query != null && query.dataValues != null) {
-      return query.dataValues;
-    } else {
-      return null;
-    }
-
+    return query;
   } catch (e) {
     console.log(e);
   }
@@ -66,7 +62,6 @@ async function selectByPassenger(id_passenger) {
     } else {
       return null;
     }
-
   } catch (e) {
     console.log(e);
   }
@@ -83,7 +78,6 @@ async function selectById(id_ride) {
     } else {
       return null;
     }
-
   } catch (e) {
     console.log(e);
   }
@@ -99,7 +93,6 @@ async function insert(data) {
     } else {
       return null;
     }
-
   } catch (e) {
     console.log(e);
   }
@@ -116,12 +109,10 @@ async function update(data, id_ride) {
     } else {
       return null;
     }
-  } catch (e) { }
+  } catch (e) {}
 }
 
-
 async function history_rides(id_passenger) {
-
   return null;
 
   //TODO ALL JOINS
@@ -140,14 +131,6 @@ async function history_rides(id_passenger) {
   */
 }
 
-
-
-
-
-
-
-
-
 exports.selectByRide = selectByRide;
 exports.all = all;
 exports.selectByUser = selectByUser;
@@ -157,8 +140,7 @@ exports.insert = insert;
 exports.update = update;
 exports.history_rides = history_rides;
 
-
-  /*
+/*
   select: (id_user)=>{
      const query = `SELECT r.* 
                     FROM ride r 
@@ -171,8 +153,7 @@ exports.history_rides = history_rides;
   },
   */
 
-
-  /*
+/*
   infoRideToPass: (id_ride_driver)=>{
     const query = `SELECT rd.response, rd.counteroffer, rd.id as id_ride_driver, r.* ,d.name, d.id as id_driver, d.name, d.email, d.phone, d.image, d.video
                   FROM ride_driver rd
@@ -184,7 +165,7 @@ exports.history_rides = history_rides;
   },
   */
 
-  /*
+/*
   infoRideToDriver: (id_ride, id_driver)=>{
       const query = `SELECT r.*, rd.id as id_ride_driver, rd.response, rd.counteroffer, d.id as id_passenger, d.name, d.email, d.phone, d.image, d.video
                       FROM ride r
@@ -200,19 +181,14 @@ exports.history_rides = history_rides;
   },
   */
 
-
-  /*
+/*
   total_rides: ()=>{
     const query = `SELECT count(*)  AS rides FROM ride WHERE ride_status = 0`;
     return query;
   },
   */
 
-
-
-
-
-  /*
+/*
 history_rides_favorite:  (id_passenger)=>{
     const query = `SELECT DISTINCT drivpass.id, drivpass.name, car_info.number, drivpass.image, 
                   (SELECT AVG(rating) FROM valorations WHERE drivpass.id = valorations.id_drivpass) as rate,
@@ -227,4 +203,3 @@ history_rides_favorite:  (id_passenger)=>{
     return query;
   }
   */
-
