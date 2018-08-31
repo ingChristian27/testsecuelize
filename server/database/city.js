@@ -15,6 +15,21 @@ async function getAll() {
     }
 }
 
+async function selectById(id) {
+    try {
+        const query = await City.find({ where: { id: id } });
+
+        if (query != null && query.dataValues != null) {
+            return query.dataValues;
+        } else {
+            return null;
+        }
+
+    } catch (e) {
+        console.log(e);
+    }
+}
+
 async function selectByState(stateId) {
     try {
         const query = await City.findAll({ where: { id_state: stateId } });
@@ -40,3 +55,4 @@ async function selectByCountry(countryId) {
 exports.getAll = getAll;
 exports.selectByState = selectByState;
 exports.selectByCountry = selectByCountry;
+exports.selectById = selectById;

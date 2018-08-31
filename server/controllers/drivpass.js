@@ -3,6 +3,9 @@ const DatabaseRide = require("../database/ride");
 const DatabaseDelivery = require("../database/delivery");
 const DatabaseLocation = require("../database/location");
 const DatabaseValoration = require("../database/valorations");
+const DatabaseCity = require("../database/city"); 
+const DatabaseCountry = require("../database/countries"); 
+const DatabaseState = require("../database/state"); 
 
 var jwt = require("jwt-simple");
 var cfg = require("../config/passport");
@@ -132,20 +135,35 @@ async function getId(req, res) {
       val = acu / valoration.length;
     }
 
-    //const get_city = await connection.query(`SELECT name, id_country, id_state FROM cities WHERE id = $1 LIMIT 1`, [id_city]);
-    //console.log("get_city", get_city.rows[0])
-    //const id_country = get_city.rows[0].id_country;
-    //const id_state = get_city.rows[0].id_state;
-    //const get_country = await connection.query(`SELECT name, indicative, short_name FROM countries WHERE id = $1 LIMIT 1`, [id_country]);
+    
+    const get_city = await DatabaseCity.selectById(id_city);
+
+    console.log('------------------------------------');
+    console.log("get_city",get_city);
+    console.log('------------------------------------');
+    const id_country = get_city.id_country;
+    const id_state = get_city.id_state;
+    const get_country = await DatabaseCountry.selectById(id_country);
+    console.log('------------------------------------');
+    console.log("country",get_country);
+    console.log('------------------------------------');
     //console.log("id_state " + id_state)
-    const id_state = null;
     if (id_state == null || id_state == undefined || id_state == "") {
       location = {
-        country: "Dumy_Colombia",
-        short_name: "Dumy_Colombia",
-        indicative: "57",
+        country: get_country.name,
+        short_name: get_country.short_name,
+        indicative: get_country.indicative,
         state: "N/A",
-        city: "Dumy_Cartagena"
+        city: get_city.name
+      };
+    }else{
+      const get_state = await DatabaseState.selectById(id_state);
+      location = {
+        country: get_country.name,
+        short_name: get_country.short_name,
+        indicative: get_country.indicative,
+        state: get_state.name,
+        city: get_city.name
       };
     }
 
