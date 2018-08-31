@@ -7,8 +7,8 @@
     * @apiParam {String} password Users password.
     * @apiParamExample {json} Request-Example:
     * {
-    *   "email": "testingmail@mail.com",
-    *   "password": "123456"
+    * 'email': 'testingmail@mail.com',
+    * 'password': '123456' 
     * }
     * 
     * @apiSuccess {String} access_token Access Token.
@@ -18,33 +18,32 @@
     * @apiSuccessExample Success-Response:
     * HTTP/1.1 200 - OK
     * {
-    *   "access_token": "TEST123",
-    *   "user_id": 1,
-    *   "status_profile": 1
+    * 'access_token': 'TEST123',
+    * 'user_id': 1,
+    * 'status_profile': 1
     * }
     * 
     * @apiError IncorrectPassword The password is incorrect (We suggest to just respond with invalid username or password - Security Issue -).
     * @apiError Incorrectuser The username doesn´t exist (We suggest to just respond with invalid username or password - Security Issue -).
     * @apiError RequiredData Any required input is null or blank.
-    * @apiError DataValidation When any input field is not present in request, response is not estandarized, not even json format. We wold do it.
     * 
     * @apiErrorExample HTTP 404 Incorrect-Password-Response:
     * HTTP/1.1 404 - Not Found
     * {
-    *   "message": "Incorrect password!"
+    * 'message': 'Incorrect password!' 
     * }
     * 
     * @apiErrorExample HTTP 403 Incorrect-User-Response:
     * HTTP/1.1 403 - Forbidden
     * {
-    *   "message": "User doesn´t exist!"
+    * 'message': 'User doesn´t exist!' 
     * }
     * 
     *
     * @apiErrorExample HTTP 400 Required-Data-Response:
     * HTTP/1.1 400 - Bad Request
     * {
-    *   "message": "email and password are required"
+    * 'message': 'email and password are required' 
     * }
     * 
 */
@@ -54,8 +53,8 @@
     * @apiName Get Car Info
     * @apiGroup Car
     * @apiSuccessExample Success-Response:
-    *   HTTP/1.1 200 - OK
-    *   {
+    * HTTP/1.1 200 - OK
+    * {
     *       "success":true,
     *       "car": {
     *           "id": 1,

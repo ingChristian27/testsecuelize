@@ -30,16 +30,12 @@ async function selectByUser(id_user, user_type) {
   try {
     let query;
     if (user_type == 1) {
-      query = await Delivery.find({ where: { id_driver: id_user } });
+      query = await Delivery.findAll({ where: { id_driver: id_user } });
     } else {
-      query = await Delivery.find({ where: { id_user: id_user } });
+      query = await Delivery.findAll({ where: { id_user: id_user } });
     }
 
-    if (query != null && query.dataValues != null) {
-      return query.dataValues;
-    } else {
-      return null;
-    }
+    return query;
 
   } catch (e) {
     console.log(e);

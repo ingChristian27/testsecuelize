@@ -2,6 +2,7 @@ const Database = require("../database/drivpass");
 const DatabaseRide = require("../database/ride");
 const DatabaseDelivery = require("../database/delivery");
 const DatabaseLocation = require("../database/location");
+const DatabaseValoration = require("../database/valorations");
 
 var jwt = require("jwt-simple");
 var cfg = require("../config/passport");
@@ -81,31 +82,30 @@ async function getId(req, res) {
     const drivpass = await Database.selectById(id_drivpass);
 
     if (drivpass == null) return res.status(200).json({});
+
     drivpass.auth_sms = 1;
     drivpass.reg_id = 1;
     drivpass.status = 2;
 
     const id_city = drivpass.city;
     const rides = await DatabaseRide.selectByUser(id_drivpass, user_type);
-    const deliveries = await DatabaseDelivery.selectByUser(
-      id_drivpass,
-      user_type
-    );
-    //const valoration = await connection.query(queries_valoration.select(id_drivpass, user_type));
-    const valoration = null;
+    const deliveries = await DatabaseDelivery.selectByUser(id_drivpass, user_type);
+    const valoration = await DatabaseValoration.select(id_drivpass, user_type); //TODO JOIN (Original)
+    //const valoration = null;
     var actual_location = await DatabaseLocation.selectById(id_drivpass);
     if (actual_location == 0) {
       actual_location = {};
     } else {
       actual_location = actual_location;
     }
-    if (valoration == null) {
+    if (valoration == null || valoration.length == 0) {
       val = 0.0;
     } else {
-      for (var i in valoration.rows) {
-        acu += parseFloat(valoration.rows[i].rating);
+
+      for (const thisValoration of valoration) {
+        acu += parseFloat(thisValoration.rating);
       }
-      val = acu / valoration.rows.length;
+      val = acu / valoration.length;
     }
 
     //const get_city = await connection.query(`SELECT name, id_country, id_state FROM cities WHERE id = $1 LIMIT 1`, [id_city]);
@@ -126,17 +126,17 @@ async function getId(req, res) {
     }
 
     let total_rides = 0;
-    if (rides != null) {
+    if (rides != null && rides.length > 0) {
       total_rides = rides.length;
     }
 
     let total_deliveries = 0;
-    if (deliveries != null) {
+    if (deliveries != null && deliveries.length > 0) {
       total_deliveries = deliveries.length;
     }
 
     let total_valorations = 0;
-    if (valoration != null) {
+    if (valoration != null && valoration.length > 0) {
       total_valorations = valoration.length;
     }
 
@@ -153,6 +153,7 @@ async function getId(req, res) {
       total_valorations: total_valorations
     });
   } catch (e) {
+    console.log(e)
     res
       .status(500)
       .json({ message: " ha ocurrido un error inesperado", err: e });

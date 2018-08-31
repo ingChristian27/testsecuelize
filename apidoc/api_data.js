@@ -27,7 +27,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Request-Example:",
-          "content": "{\n  \"email\": \"testingmail@mail.com\",\n  \"password\": \"123456\"\n}",
+          "content": "{\n'email': 'testingmail@mail.com',\n'password': '123456' \n}",
           "type": "json"
         }
       ]
@@ -61,7 +61,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 - OK\n{\n  \"access_token\": \"TEST123\",\n  \"user_id\": 1,\n  \"status_profile\": 1\n}",
+          "content": "HTTP/1.1 200 - OK\n{\n'access_token': 'TEST123',\n'user_id': 1,\n'status_profile': 1\n}",
           "type": "json"
         }
       ]
@@ -86,29 +86,23 @@ define({ "api": [
             "optional": false,
             "field": "RequiredData",
             "description": "<p>Any required input is null or blank.</p>"
-          },
-          {
-            "group": "Error 4xx",
-            "optional": false,
-            "field": "DataValidation",
-            "description": "<p>When any input field is not present in request, response is not estandarized, not even json format. We wold do it.</p>"
           }
         ]
       },
       "examples": [
         {
           "title": "HTTP 404 Incorrect-Password-Response:",
-          "content": "HTTP/1.1 404 - Not Found\n{\n  \"message\": \"Incorrect password!\"\n}",
+          "content": "HTTP/1.1 404 - Not Found\n{\n'message': 'Incorrect password!' \n}",
           "type": "json"
         },
         {
           "title": "HTTP 403 Incorrect-User-Response:",
-          "content": "HTTP/1.1 403 - Forbidden\n{\n  \"message\": \"User doesn´t exist!\"\n}",
+          "content": "HTTP/1.1 403 - Forbidden\n{\n'message': 'User doesn´t exist!' \n}",
           "type": "json"
         },
         {
           "title": "HTTP 400 Required-Data-Response:",
-          "content": "HTTP/1.1 400 - Bad Request\n{\n  \"message\": \"email and password are required\"\n}",
+          "content": "HTTP/1.1 400 - Bad Request\n{\n'message': 'email and password are required' \n}",
           "type": "json"
         }
       ]
@@ -127,7 +121,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 - OK\n{\n    \"success\":true,\n    \"car\": {\n        \"id\": 1,\n        \"id_user\": 2,\n        \"number\": \"MUM926\",\n        \"year\": \"2018\",\n        \"make\": \"1\",\n        \"model\": \"Sonic\",\n        \"color\": \"black\",\n        \"plate\": \"AAA\",\n        \"status\": 1,\n        \"createdAt\": \"2018-01-01T00:00:00.000Z\",\n        \"updatedAt\": \"2018-01-01T00:00:00.000Z\"\n    }\n}",
+          "content": "HTTP/1.1 200 - OK\n{\n      \"success\":true,\n      \"car\": {\n          \"id\": 1,\n          \"id_user\": 2,\n          \"number\": \"MUM926\",\n          \"year\": \"2018\",\n          \"make\": \"1\",\n          \"model\": \"Sonic\",\n          \"color\": \"black\",\n          \"plate\": \"AAA\",\n          \"status\": 1,\n          \"createdAt\": \"2018-01-01T00:00:00.000Z\",\n          \"updatedAt\": \"2018-01-01T00:00:00.000Z\"\n      }\n  }",
           "type": "json"
         }
       ]

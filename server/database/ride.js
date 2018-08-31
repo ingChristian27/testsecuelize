@@ -40,7 +40,7 @@ async function selectByUser(id_user, user_type) {
     let query;
     if (user_type == 1) {
       //query = await Ride.find({ where: { id_driver: id_user } });
-      const query = await Ride.findAll({ where: { id_driver: id_user } });
+      query = await Ride.findAll({ where: { id_driver: id_user } });
     } else {
       // query = await Ride.find({ where: { id_passenger: id_user } });
       query = await Ride.findAll({ where: { id_passenger: id_user } });
@@ -109,7 +109,7 @@ async function update(data, id_ride) {
     } else {
       return null;
     }
-  } catch (e) {}
+  } catch (e) { }
 }
 
 async function history_rides(id_passenger) {
