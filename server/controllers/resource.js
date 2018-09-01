@@ -1,3 +1,18 @@
+const cloudinary = require("cloudinary");
+
+/*
+cloudinary.config({
+  cloud_name: process.env.CLOUD,
+  api_key: process.env.API_CLOUD_KEY,
+  api_secret: process.env.API_CLOUD_SECRET
+});
+*/
+cloudinary.config({
+  cloud_name: "buscaride",
+  api_key: "336719295271228",
+  api_secret: "GN_25FDzJILRqjFov8BFjwN08z0"
+});
+
 async function add(req, res) {
   try {
     var path;
