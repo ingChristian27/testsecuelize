@@ -18,7 +18,7 @@ module.exports = {
       },
       id_driver: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: true
       },
       location_start: {
         type: Sequelize.STRING,

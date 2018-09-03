@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       id_driver: {
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: true
       },
       location_start: {
         type: DataTypes.STRING,
