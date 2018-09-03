@@ -5,8 +5,8 @@ exports.sendEmail = function(data) {
   var transporter = nodemailer.createTransport({
     service: "Gmail",
     auth: {
-      user: "ingchristian27@gmail.com",
-      pass: "chrisdudao"
+      user: "buscaride@gmail.com",
+      pass: "Bu$c4.Ride.2017"
     }
   });
   // Definimos el email
@@ -23,6 +23,7 @@ exports.sendEmail = function(data) {
   transporter.sendMail(mailOptions, function(error, info) {
     if (error) {
       console.log("==============================");
+      console.log("existio un error en el envio de email");
       //console.log(error);
       return false;
     } else {

@@ -95,7 +95,7 @@ async function sendMail(req, res) {
     return res
       .status(404)
       .json({ message: "la contraseña se ha actuaizado con éxito" });
-  } catch (e) { }
+  } catch (e) {}
 }
 
 async function restore(req, res) {
@@ -130,7 +130,7 @@ async function restore(req, res) {
     return res
       .status(200)
       .json({ message: "la contraseña se ha actuaizado con éxito" });
-  } catch (e) { }
+  } catch (e) {}
 }
 
 exports.authentication = authentication;
