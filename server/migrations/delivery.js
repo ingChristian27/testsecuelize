@@ -32,23 +32,23 @@ module.exports = {
         allowNull: false
       },
       latitude_start: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
         allowNull: false
       },
       longitude_start: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
         allowNull: true
       },
       latitude_end: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
         allowNull: false
       },
       longitude_end: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
         allowNull: true
       },
       price: {
-        type: Sequelize.DOUBLE,
+        type: Sequelize.STRING,
         allowNull: false
       },
       accept_counteroffer: {
@@ -58,7 +58,7 @@ module.exports = {
       },
       delivery_status: {
         type: Sequelize.DOUBLE,
-        allowNull: true,
+        allowNull: false,
         validate: { min: -1, max: 3 } // doesn´t started = -1, started = 1, finished = 0
       },
       status: {

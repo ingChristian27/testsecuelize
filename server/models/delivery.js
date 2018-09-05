@@ -24,23 +24,23 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false
       },
       latitude_start: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false
       },
       longitude_start: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: true
       },
       latitude_end: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false
       },
       longitude_end: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: true
       },
       price: {
-        type: DataTypes.DOUBLE,
+        type: DataTypes.STRING,
         allowNull: false
       },
       accept_counteroffer: {
@@ -50,7 +50,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       delivery_status: {
         type: DataTypes.DOUBLE,
-        allowNull: true,
+        allowNull: false,
         validate: { min: -1, max: 3 } // doesn´t started = -1, started = 1, finished = 0
       },
       status: {
