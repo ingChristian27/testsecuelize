@@ -5,7 +5,7 @@ var auth = require("../config/auth.js")();
 const serviceToken = require("../services/token");
 
 router.post("/", authentication.authentication);
-router.post("/change-password/", auth.authenticate(), authentication.restore);
+router.post("/change-password/", authentication.restore);
 router.post("/generate-password/", authentication.sendMail);
 router.get(
   "/restore/:token",
