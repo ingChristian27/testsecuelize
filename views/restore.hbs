@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Buscaride</title>
+    <style>
+    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+</head>
+
+<body>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Buscaride</a>
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#"> {{email}}</a>
+                </div>
+            </ul>
+
+        </div>
+    </nav>
+    <div class="container">
+        <H1>Restaurar contraseña</H1>
+
+        <div class="form-group">
+            <label for="exampleInputPassword1">Nuevo password</label>
+            <input type="password" id="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Verificar password</label>
+            <input type="password" id="password_again" class="form-control" id="exampleInputPassword1" placeholder="Password">
+        </div>
+        <input id="email" value="{{email}}" style="display :none">
+        <input id="path" value="{{path}}" style="display :none">
+
+        <button id="send" type="submit" class="btn btn-primary">Enviar</button>
+
+    </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
+    <script type="text/javascript">
+
+        const formLogin = document.querySelector('#form_recover')
+        const formData = new FormData(formLogin)
+        var form = new FormData(document.getElementById('login-form'));
+
+        $("#send").click(function () {
+            const data = {}
+            data.newpass = document.getElementById("password").value;
+            data.confirmpass = document.getElementById("password_again").value;
+            data.email = document.getElementById("email").value;
+            path = document.getElementById("path").value;
+            console.log(data)
+
+            let url = "http://" + path + "/login/new-password-web/";
+            console.log(url)
+            if (data.newpass === data.confirmpass) {
+                console.log("envio..")
+
+                $.ajax({
+                    url: url,
+                    data: data,
+                    type: 'POST',
+                    success: function (response) {
+                        alert("Su contraseña se ha actualizado con éxito")
+                    },
+                    error: function (xhr, status) {
+
+                        alert("Revise sus credenciales y velva a intentarlo")
+                    },
+                });
+            } else {
+                console.log(data.newpass, data.confirmpass)
+                alert("Los datos con coinciden")
+            }
+
+
+        });
+
+
+
+    </script>
+</body>
+
+</html>
