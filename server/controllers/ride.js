@@ -3,6 +3,7 @@ const DatabaseRideDriver = require("../database/ride_driver");
 const DatabaseDrivpass = require("../database/drivpass");
 const DatabaseCarInfo = require("../database/car_info");
 const DatabaseModelCar = require("../database/model_car");
+const DatabaseColorCar = require("../database/color_car");
 
 const moment = require("moment");
 
@@ -233,7 +234,18 @@ async function questions(req, res) {
         });
     }
 
-    question = "Is this car a " + car_info.color + " " + model.car_mark.name + " " + model.name + "?"
+    const color = await DatabaseColorCar.getById(car_info.color);
+
+    if (color == null) {
+      return res
+        .status(404)
+        .json({
+          success: false,
+          message: "No Color for color Id " + car_info.color
+        });
+    }
+
+    question = "Is this car a " + color.name + " " + model.car_mark.name + " " + model.name + "?"
 
     return res.status(200).json({ success: true, question });
 
