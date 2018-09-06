@@ -1,8 +1,9 @@
-const CarMark = require("../models").car_mark;
+const colors = require("../models").color_car;
 
 async function getAll() {
   try {
-    const query = await CarMark.findAll();
+    const query = await colors.findAll();
+
     return query;
   } catch (e) {
     console.log(e);
