@@ -14,6 +14,8 @@ router
 
   .get("/history/:id", auth.authenticate(), ride.history)
 
-  .get("/history_favorite/:id", auth.authenticate(), ride.history_favorite);
+  .get("/history_favorite/:id", auth.authenticate(), ride.history_favorite)
+
+  .get("/questions/:id",  ride.questions);
 
 module.exports = router;
