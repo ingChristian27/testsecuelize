@@ -10,8 +10,3 @@ router.get("/model/:mark", infoCar.model);
 router.get("/color", infoCar.color);
 
 module.exports = router;
-
-/**
- * http://localhost:8000/info_car/mark
- * http://localhost:8000/info_car/model/model
- */
