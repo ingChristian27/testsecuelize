@@ -5,6 +5,9 @@ async function add(req, res) {
   try {
     //tener en cuenta insert id, facilita el proceso de asignacion de drivers
     const params = req.body;
+
+    params.delivery_status = -1;
+
     const delivery = await Database.selectById(params.id_user);
     //        if(delivery.rows.length > 0) return res.status(200).json({details: "You already have a delivery in progress!"});
 
