@@ -37,4 +37,14 @@ Object.keys(db).forEach(modelName => {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
+
+
+//Models/tables
+//db.model_car = require('./model_car')(sequelize, Sequelize);  
+//db.car_mark = require('./car_mark')(sequelize, Sequelize);  
+
+//Relations
+//db.model_car.belongsTo(db.car_mark);
+//db.car_mark.hasMany(db.model_car);
+
 module.exports = db;
