@@ -31,6 +31,23 @@ async function select(drivpassId, user_type) {
     console.log(e);
   }
 }
+async function update(data, id) {
+  console.log("UPDATE");
+  try {
+    const query = await models.valoration.update(data, {
+      returning: true,
+      where: { id: id }
+    });
+    if (query != null && query.dataValues != null) {
+      return query.dataValues;
+    } else {
+      return null;
+    }
+  } catch (e) {
+    console.log(e);
+  }
+}
 
 exports.insert = insert;
 exports.select = select;
+exports.update = update;

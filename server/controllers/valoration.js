@@ -48,6 +48,25 @@ async function get(req, res) {
     });
   }
 }
+async function putAnswer(req, res) {
+  try {
+    const idValoration = parseInt(req.params.id);
+    const answer = req.body.answer;
+    let data = { answer: answer };
+
+    const result = await Database.update(data, idValoration);
+    console.log(result);
+    return res
+      .status(200)
+      .json({ message: "La respuesta ha sido modificada con éxito." });
+  } catch (e) {
+    console.log(e);
+    return res.status(500).send({
+      message: "{'error':'Error inesperado. '}"
+    });
+  }
+}
 
 exports.add = add;
 exports.get = get;
+exports.putAnswer = putAnswer;
