@@ -21,7 +21,7 @@ const carRouter = require("./server/router/car");
 const drivpass = require("./server/router/drivpass");
 const info_car = require("./server/router/infor_car");
 const answers = require("./server/router/answers");
-
+const verify = require("./server/router/verify");
 module.exports = function(app) {
   app.use("/login", authentication);
   app.use("/user", drivpass);
@@ -49,6 +49,7 @@ module.exports = function(app) {
   app.use("/drivpass", drivpass);
   app.use("/info_car", info_car);
   app.use("/answers", answers);
+  app.use("/verify", verify);
   app.get("/", async (req, res, next) => {
     res.json({ message: "Servidor de test..." });
   });
