@@ -12,15 +12,16 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false
       },
-      id_drivpass: {
-        type: Sequelize.INTEGER,
-        allowNull: false
-      },
+      drivpass_id: { type: Sequelize.INTEGER, allowNull: false },
       commentary: {
         type: Sequelize.STRING,
         allowNull: true
       },
       description: {
+        type: Sequelize.STRING,
+        allowNull: true
+      },
+      answer: {
         type: Sequelize.STRING,
         allowNull: true
       },
@@ -30,7 +31,7 @@ module.exports = {
       },
       time_send: {
         type: Sequelize.DATE,
-        allowNull: false,
+        allowNull: false
       },
       rating: {
         type: Sequelize.DOUBLE,

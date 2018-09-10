@@ -7,6 +7,6 @@ router
 
   .post("/add", auth.authenticate(), valorations.add)
 
-  .get("/:id/:type", auth.authenticate(), valorations.get);
+  .get("/:id/:type", /*auth.authenticate() ,*/ valorations.get);
 
 module.exports = router;
