@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
     {}
   );
   model_car.associate = function(models) {
-    //model_car.belongsTo(models.car_mark);
+    model_car.belongsTo(models.car_mark);
   };
   return model_car;
 };

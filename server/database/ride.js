@@ -7,7 +7,9 @@
 * VERIFICAR
 */
 
+const models = require("../models");
 const Ride = require("../models").ride;
+
 
 async function selectByRide(id_ride) {
   try {
@@ -53,15 +55,16 @@ async function selectByUser(id_user, user_type) {
 
 async function selectByPassenger(id_passenger) {
   try {
-    const query = await Ride.find({
-      where: { id_passenger: id_passenger, status: 1 }
+    const query = await Ride.findAll({
+      where: { id_passenger: id_passenger, status: 1 },
+      include: [
+          { model: models.drivpass },
+          { model: models.car_info }
+      ]
     });
 
-    if (query != null && query.dataValues != null) {
-      return query.dataValues;
-    } else {
-      return null;
-    }
+    return query;
+
   } catch (e) {
     console.log(e);
   }
