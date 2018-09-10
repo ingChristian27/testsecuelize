@@ -14,5 +14,3 @@ module.exports = (sequelize, DataTypes) => {
   };
   return model_car;
 };
-
-//node_modules/.bin/sequelize db:migrate

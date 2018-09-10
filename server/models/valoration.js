@@ -9,19 +9,14 @@ module.exports = (sequelize, DataTypes) => {
   var valoration = sequelize.define(
     "valoration",
     {
-      id_user: {
-        type: DataTypes.INTEGER,
-        allowNull: false
-      },
-      id_drivpass: {
-        type: DataTypes.INTEGER,
-        allowNull: false
-      },
-      commentary: {
+      id_user: { type: DataTypes.INTEGER, allowNull: false },
+      drivpass_id: { type: DataTypes.INTEGER, allowNull: false },
+      commentary: { type: DataTypes.STRING, allowNull: true },
+      description: {
         type: DataTypes.STRING,
         allowNull: true
       },
-      description: {
+      answer: {
         type: DataTypes.STRING,
         allowNull: true
       },
@@ -32,7 +27,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       time_send: {
         type: DataTypes.DATE,
-        allowNull: false,
+        allowNull: false
       },
       rating: {
         type: DataTypes.DOUBLE,
@@ -41,9 +36,10 @@ module.exports = (sequelize, DataTypes) => {
     },
     {}
   );
-  valoration.associate = function (models) {
+  valoration.associate = function(models) {
     // associations can be defined here
-    //valoration.belongsTo(models.drivpass); // Will add drivpassId to valoration
+    valoration.belongsTo(models.drivpass, { foreignKey: "drivpass_id" });
+
     //valoration.belongsTo(models.drivpass); // Will add drivpassId to valoration
   };
   return valoration;

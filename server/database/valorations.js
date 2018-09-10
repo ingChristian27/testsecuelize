@@ -1,32 +1,53 @@
-const Valoration = require("../models").valoration;
+const models = require("../models");
 
 async function insert(data) {
-    try {
-        const query = await Valoration.create(data);
+  try {
+    const query = await models.valoration.create(data);
 
-        if (query != null && query.dataValues != null) {
-            return query.dataValues;
-        } else {
-            return null;
+    if (query != null && query.dataValues != null) {
+      return query.dataValues;
+    } else {
+      return null;
+    }
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+async function select(drivpassId, user_type) {
+  try {
+    const query = await models.valoration.findAll({
+      where: { drivpass_id: drivpassId, type: user_type },
+      include: [
+        {
+          model: models.drivpass,
+          attributes: ["image", "name"]
         }
+      ]
+    });
 
-    } catch (e) {
-        console.log(e);
-    }
+    return query;
+  } catch (e) {
+    console.log(e);
+  }
 }
-
-async function select(id_drivpass, user_type) {
-    try {
-        const query = await Valoration.findAll({ where: { id_drivpass: id_drivpass, type: user_type } });
-
-        return query;
-
-    } catch (e) {
-        console.log(e);
+async function update(data, id) {
+  console.log("UPDATE");
+  try {
+    const query = await models.valoration.update(data, {
+      returning: true,
+      where: { id: id }
+    });
+    if (query != null && query.dataValues != null) {
+      return query.dataValues;
+    } else {
+      return null;
     }
+  } catch (e) {
+    console.log(e);
+  }
 }
-
-
 
 exports.insert = insert;
 exports.select = select;
+exports.update = update;

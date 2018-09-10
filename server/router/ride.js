@@ -16,6 +16,8 @@ router
 
   .get("/history_favorite/:id", auth.authenticate(), ride.history_favorite)
 
-  .get("/questions/:id",  ride.questions);
+  .get("/questions/:id", ride.questions)
+
+  .put("/location", ride.putLocation);
 
 module.exports = router;

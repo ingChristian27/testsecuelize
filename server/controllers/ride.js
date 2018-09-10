@@ -17,18 +17,16 @@ async function add(req, res) {
 
     //    if(ride.rows.length > 0)  return res.status(200).json({details: "You already have a ride in progress!"});
     const post = await Database.insert(params);
-    console.log('------------------------------------');
+    console.log("------------------------------------");
     console.log("post", post);
-    console.log('------------------------------------');
+    console.log("------------------------------------");
     //const rideResult = await Database.selectById(post.id);
 
-    return res
-      .status(200)
-      .json({
-        success: true,
-        Data: post,
-        currentDate: moment(new Date())
-      });
+    return res.status(200).json({
+      success: true,
+      Data: post,
+      currentDate: moment(new Date())
+    });
   } catch (e) {
     console.log(e);
     return res.status(500).send({
@@ -140,7 +138,7 @@ async function history(req, res) {
     //const history = await Database.history_rides(id_passenger);
     var history = null;
 
-    var ride = await Database.selectByPassenger(id_passenger)
+    var ride = await Database.selectByPassenger(id_passenger);
 
     var drivpass = await DatabaseDrivpass.selectById(ride.id_driver);
 
@@ -153,23 +151,17 @@ async function history(req, res) {
       price: ride.price,
       number: car_info.number,
       image: drivpass.image,
-      rate: null,//(SELECT AVG(rating) FROM valorations WHERE drivpass.id = valorations.id_drivpass) as rate,
-      favorite_id: null//(SELECT id FROM drivpasses WHERE favorite_driver.id_driver =  drivpass.id) as favorite_id
-    }
+      rate: null, //(SELECT AVG(rating) FROM valorations WHERE drivpass.id = valorations.id_drivpass) as rate,
+      favorite_id: null //(SELECT id FROM drivpasses WHERE favorite_driver.id_driver =  drivpass.id) as favorite_id
+    };
     //----------------------------------------------------------------
 
-
-
-
-
     if (history == null)
-      return res
-        .status(200)
-        .json({
-          success: false,
-          message: "No history rides",
-          rides: history.rows
-        });
+      return res.status(200).json({
+        success: false,
+        message: "No history rides",
+        rides: history.rows
+      });
     return res.status(200).json({ success: true, rides: history });
   } catch (e) {
     console.log(e);
@@ -184,13 +176,11 @@ async function history_favorite(req, res) {
     const id_passenger = req.params.id;
     const history = Database.history_rides_favorite(id_passenger);
     if (history == null)
-      return res
-        .status(200)
-        .json({
-          success: false,
-          message: "No history favorite rides",
-          rides: history.rows
-        });
+      return res.status(200).json({
+        success: false,
+        message: "No history favorite rides",
+        rides: history.rows
+      });
     return res.status(200).json({ success: true, rides: history });
   } catch (e) {
     console.log(e);
@@ -205,51 +195,86 @@ async function questions(req, res) {
     const id_ride = req.params.id;
     const ride = await Database.selectByRide(id_ride);
     if (ride == null) {
-      return res
-        .status(404)
-        .json({
-          success: false,
-          message: "No rides for ride id " + id_ride
-        });
+      return res.status(404).json({
+        success: false,
+        message: "No rides for ride id " + id_ride
+      });
     }
 
-    const car_info = await DatabaseCarInfo.selectCar(ride.id_driver)
+    const car_info = await DatabaseCarInfo.selectCar(ride.id_driver);
 
     if (car_info == null) {
-      return res
-        .status(404)
-        .json({
-          success: false,
-          message: "No Car Info for driver " + ride.id_driver
-        });
+      return res.status(404).json({
+        success: false,
+        message: "No Car Info for driver " + ride.id_driver
+      });
     }
 
     const model = await DatabaseModelCar.getById(car_info.model);
 
     if (model == null) {
-      return res
-        .status(404)
-        .json({
-          success: false,
-          message: "No Model for model Id " + car_info.model
-        });
+      return res.status(404).json({
+        success: false,
+        message: "No Model for model Id " + car_info.model
+      });
     }
 
     const color = await DatabaseColorCar.getById(car_info.color);
 
     if (color == null) {
-      return res
-        .status(404)
-        .json({
-          success: false,
-          message: "No Color for color Id " + car_info.color
-        });
+      return res.status(404).json({
+        success: false,
+        message: "No Color for color Id " + car_info.color
+      });
     }
 
-    question = "Is this car a " + color.name + " " + model.car_mark.name + " " + model.name + "?"
+    question =
+      "Is this car a " +
+      color.name +
+      " " +
+      model.car_mark.name +
+      " " +
+      model.name +
+      "?";
 
     return res.status(200).json({ success: true, question });
+  } catch (e) {
+    console.log(e);
+    return res.status(500).send({
+      message: "{'error':'Error inesperado. '}"
+    });
+  }
+}
+/**
+ * state: 1 = location start, 2 = location end
+ * @param {location, state, id} req
+ * @param {*} res
+ */
+async function putLocation(req, res) {
+  try {
+    console.log(req.body.stateLocation);
+    const location = req.body.location;
+    const stateLocation = req.body.stateLocation;
+    const idRide = req.body.id;
 
+    if (stateLocation != 1 && stateLocation != 2) {
+      return res.status(404).json({
+        success: false,
+        message: "StateLocation no coincide con los parametros aceptados."
+      });
+    }
+    if (stateLocation == 1) {
+      let data = { location_start: location };
+      console.log(data);
+      await Database.update(data, idRide);
+    } else {
+      let data = { location_end: location };
+      await Database.update(data, idRide);
+    }
+
+    return res
+      .status(200)
+      .json({ message: "La respuesta ha sido modificada con éxito." });
   } catch (e) {
     console.log(e);
     return res.status(500).send({
@@ -264,3 +289,4 @@ exports.edit = edit;
 exports.history = history;
 exports.history_favorite = history_favorite;
 exports.questions = questions;
+exports.putLocation = putLocation;

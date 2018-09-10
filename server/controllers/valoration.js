@@ -22,18 +22,22 @@ async function get(req, res) {
     const id_drivpass = parseInt(req.params.id);
     const user_type = parseInt(req.params.type);
     const valoration = await Database.select(id_drivpass, user_type);
+    console.log(valoration);
     const user = await DatabaseDrivpass.selectById(id_drivpass);
-    var acu = 0;
-    var val = 0;
+
+    let acu = 0;
+    let val = 0;
+    let count = 0;
+
     if (valoration == null) {
       val = 0.0;
     } else {
       for (var i in valoration) {
         acu += parseFloat(valoration[i].rating);
+        count++;
       }
-      val = acu / valoration.rows.length;
+      val = acu / count;
     }
-
     return res
       .status(200)
       .json({ actual_valoration: val, user: user, valorations: valoration });
@@ -44,6 +48,25 @@ async function get(req, res) {
     });
   }
 }
+async function putAnswer(req, res) {
+  try {
+    const idValoration = parseInt(req.params.id);
+    const answer = req.body.answer;
+    let data = { answer: answer };
+
+    const result = await Database.update(data, idValoration);
+    console.log(result);
+    return res
+      .status(200)
+      .json({ message: "La respuesta ha sido modificada con éxito." });
+  } catch (e) {
+    console.log(e);
+    return res.status(500).send({
+      message: "{'error':'Error inesperado. '}"
+    });
+  }
+}
 
 exports.add = add;
 exports.get = get;
+exports.putAnswer = putAnswer;
