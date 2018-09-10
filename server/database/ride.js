@@ -109,7 +109,7 @@ async function update(data, id_ride) {
     } else {
       return null;
     }
-  } catch (e) { }
+  } catch (e) {}
 }
 
 async function history_rides(id_passenger) {
