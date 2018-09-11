@@ -1,6 +1,7 @@
 const Database = require("../database/valorations");
 const DatabaseDrivpass = require("../database/drivpass");
-
+const verifyDB = require("../database/driver_verify");
+const typeBD = require("../database/driver_type_assign");
 async function add(req, res) {
   try {
     const params = req.body;
@@ -21,26 +22,52 @@ async function get(req, res) {
   try {
     const id_drivpass = parseInt(req.params.id);
     const user_type = parseInt(req.params.type);
-    const valoration = await Database.select(id_drivpass, user_type);
-    console.log(valoration);
+    const responsevaloration = await Database.select(id_drivpass, user_type);
     const user = await DatabaseDrivpass.selectById(id_drivpass);
+    let data = {};
+    if (user_type == 2) {
+      console.log("entro al driver");
+      let verify = await verifyDB.getByIdDriver(id_drivpass);
+      data.verify = verify.count;
+      data.driverTypes = await typeBD.getDrivers(id_drivpass);
+    }
 
     let acu = 0;
     let val = 0;
     let count = 0;
-
-    if (valoration == null) {
+    let valorations = [];
+    if (responsevaloration == null) {
       val = 0.0;
     } else {
-      for (var i in valoration) {
-        acu += parseFloat(valoration[i].rating);
+      for (var i in responsevaloration) {
+        let valoration = {};
+
+        acu += parseFloat(responsevaloration[i].rating);
         count++;
+        valoration.rating = responsevaloration[i].rating;
+        valoration.id = responsevaloration[i].id;
+        valoration.id_user = responsevaloration[i].id_user;
+        valoration.drivpass_id = responsevaloration[i].drivpass_id;
+        valoration.commentary = responsevaloration[i].commentary;
+        valoration.description = responsevaloration[i].description;
+        valoration.answer = responsevaloration[i].answer;
+        valoration.type = responsevaloration[i].type;
+        valoration.time_send = responsevaloration[i].time_send;
+        valoration.createdAt = responsevaloration[i].createdAt;
+        valoration.updatedAt = responsevaloration[i].updatedAt;
+        valoration.image = responsevaloration[i].drivpass.image;
+        valoration.name = responsevaloration[i].drivpass.name;
+
+        valorations.push(valoration);
       }
+
       val = acu / count;
     }
-    return res
-      .status(200)
-      .json({ actual_valoration: val, user: user, valorations: valoration });
+    data.responsevaloration = val;
+    data.user = user;
+    data.valorations = valorations;
+
+    return res.status(200).json(data);
   } catch (e) {
     console.log(e);
     return res.status(500).send({

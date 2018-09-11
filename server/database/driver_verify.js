@@ -3,7 +3,7 @@ const verifyDB = require("../models").driver_verify;
 async function getByIdDriver(idDriver) {
   try {
     const query = await verifyDB.findAndCountAll({
-      where: { driverId: idDriver }
+      where: { driverId: idDriver, verify: true }
     });
     return query;
   } catch (e) {
