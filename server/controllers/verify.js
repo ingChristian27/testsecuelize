@@ -4,8 +4,7 @@ async function get(req, res) {
   try {
     const idDriver = parseInt(req.params.idDriver);
     response = await Database.getByIdDriver(idDriver);
-    let val = 0;
-    return res.status(200).json({ countUserVerify: val });
+    return res.status(200).json({ countUserVerify: response.count });
   } catch (e) {
     console.log(e);
     return res.status(500).send({
