@@ -4,6 +4,7 @@ const DatabaseDrivpass = require("../database/drivpass");
 const DatabaseCarInfo = require("../database/car_info");
 const DatabaseModelCar = require("../database/model_car");
 const DatabaseColorCar = require("../database/color_car");
+const DatabaseValorations = require("../database/valorations");
 
 const moment = require("moment");
 
@@ -133,34 +134,45 @@ async function history(req, res) {
   try {
     const id_passenger = req.params.id;
 
-    //TODO HISTORY (TEMPORAL)
-    //----------------------------------------------------------------
-    //const history = await Database.history_rides(id_passenger);
-    var history = null;
+    var rides = await Database.selectByPassenger(id_passenger);
 
-    var ride = await Database.selectByPassenger(id_passenger);
+    //var drivpass = await DatabaseDrivpass.selectById(ride.id_driver);
 
-    var drivpass = await DatabaseDrivpass.selectById(ride.id_driver);
+    //var car_info = await DatabaseCarInfo.selectCar(ride.id_driver);
 
-    var car_info = await DatabaseCarInfo.selectCar(ride.id_driver);
+    var history = [];
+    for (const ride of rides) {
 
-    history = {
-      id: ride.id,
-      id_driver: ride.id_driver,
-      name: drivpass.name,
-      price: ride.price,
-      number: car_info.number,
-      image: drivpass.image,
-      rate: null, //(SELECT AVG(rating) FROM valorations WHERE drivpass.id = valorations.id_drivpass) as rate,
-      favorite_id: null //(SELECT id FROM drivpasses WHERE favorite_driver.id_driver =  drivpass.id) as favorite_id
-    };
-    //----------------------------------------------------------------
+      const user_type =2;
+      const rates = await DatabaseValorations.select(ride.dataValues.drivpass.id,user_type);
+      //TODO AGREGAR RELACION HASMANY VALORATIONS EN DRIVPASS?
+      //TODO REVISAR SI SE PUEDE AGREGAR LA RELACION PORQUE TENDRIA QUE SER AL DRIVPASSID Y AL USERID DEPENDIENTO DEL TIPO DE USUARIO
 
-    if (history == null)
+      var rateAvg = 0;
+      for (const rate of rates) {
+        rateAvg += rate.dataValues.rating;
+      }
+
+      history.push({
+        id: ride.dataValues.id,
+        location_start: ride.dataValues.location_start,
+        location_end: ride.dataValues.location_end,
+        ride_date: ride.dataValues.createdAt,
+        id_driver: ride.dataValues.id_driver,
+        name: ride.dataValues.drivpass.name,
+        price: ride.dataValues.price,
+        number: ride.dataValues.car_info.number,
+        image: ride.dataValues.drivpass.image,
+        rate: rateAvg, //(SELECT AVG(rating) FROM valorations WHERE drivpass.id = valorations.id_drivpass) as rate,
+        favorite_id: null //(SELECT id FROM drivpasses WHERE favorite_driver.id_driver =  drivpass.id) as favorite_id
+      });
+    }
+
+    if (history == null || history.length == 0)
       return res.status(200).json({
         success: false,
         message: "No history rides",
-        rides: history.rows
+        rides: history
       });
     return res.status(200).json({ success: true, rides: history });
   } catch (e) {

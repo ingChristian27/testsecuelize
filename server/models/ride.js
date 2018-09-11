@@ -75,8 +75,8 @@ module.exports = (sequelize, DataTypes) => {
   );
   Ride.associate = function(models) {
     // associations can be defined here
-    //Ride.belongsTo(models.drivpass); // Will add drivpassId to Ride
-    //Ride.belongsTo(models.drivpass); // Will add drivpassId to Ride
+    Ride.belongsTo(models.drivpass, {foreignKey: 'id_driver'}); // Adds id_driver to Ride
+    Ride.belongsTo(models.car_info, {foreignKey: 'id_driver'}); // Adds id_driver to Ride
   };
   return Ride;
 };
