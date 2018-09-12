@@ -3,7 +3,12 @@ const DatabaseDrivpass = require("../database/drivpass");
 
 async function add(req, res) {
   try {
-    const params = req.body;
+    let params = req.body;
+
+   
+    params.drivpass_id  =  params.id_drivpass;
+    params.time_send = new Date();
+
     const valoration = await Database.insert(params);
     return res.status(200).json({
       success: true,
