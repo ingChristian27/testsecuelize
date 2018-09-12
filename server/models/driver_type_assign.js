@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
         "driver_type_assign",
         {
             id_driver: { type: DataTypes.INTEGER, allowNull: false },
-            id_driver_type: { type: DataTypes.INTEGER, allowNull: false }
+            id_driver_type: { type: DataTypes.STRING, allowNull: false }
         },
         {}
     );
